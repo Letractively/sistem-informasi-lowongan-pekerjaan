@@ -1,0 +1,136 @@
+#tb-utama
+{
+    margin:0px;
+    list-style:none;
+    padding:0px 3px 3px 0px;
+    background-color:#414141;
+    background-repeat:repeat;
+    border-color:#CECECE;
+    border-width:4px;
+    border-style:ridge;
+}
+
+#tb-utama #tb-menu
+{
+    width: auto;
+    margin: 0 0;
+    padding: 0 0 0 0;
+    float: left;
+}
+
+#tb-utama #tb-menu *
+{
+    z-index: 1000;
+}
+
+#tb-utama #tb-menu ul.topnav
+{
+    list-style: none;
+    padding: 0 0 0 0;
+    margin: 0 5px 0 0;
+    width: auto;
+    font-size: 12px;
+}
+
+#tb-utama #tb-menu ul.topnav li
+{
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    float: left;
+    text-align: right;
+}
+
+#tb-utama #tb-menu ul.topnav li a
+{
+    display: block;
+    text-decoration: none;
+    font-weight: normal;
+    font-size: 12px;
+    color: #ffffff;
+    margin: 0 0 0 0;
+    cursor: pointer;
+    padding: 10px 8px 5px 20px;
+    border-right: dotted 1px #FFFFFF;
+}
+
+#tb-utama #tb-menu ul.topnav li a.last
+{
+    border: none;
+}
+
+#tb-utama #tb-menu ul.topnav li a:hover
+{
+    background-color:#a3a3a3;
+    color: #ffffff;
+    text-decoration:none;
+}
+
+#tb-utama #tb-menu ul.topnav li ul.subnav
+{
+    list-style: none;
+    position: absolute; /*--Important - Keeps subnav from affecting main navigation flow--*/
+    background: #a1b2bf;
+    margin: 0; padding: 0;
+    display: none;
+    float: left;
+    width: auto;
+    -moz-border-radius-bottomleft: 5px;
+    -moz-border-radius-bottomright: 5px;
+    -webkit-border-bottom-left-radius: 5px;
+    -webkit-border-bottom-right-radius: 5px;
+    border: 1px solid #a1b2bf;
+    z-index: 1;
+}
+
+#tb-utama #tb-menu ul.topnav li ul.subnav li
+{
+    margin: 0; padding: 0;
+    border-bottom: 1px solid #444; /*--Create bevel effect--*/
+    clear: both;
+    width: 170px;
+    z-index: 1;
+}
+
+#tb-utama #tb-menu ul.topnav li ul.subnav li:hover
+{
+    z-index: 1;
+}
+
+html #tb-utama #tb-menu ul.topnav li ul.subnav li a {
+    display: block;
+    width: auto;
+    background: #edf1f3;
+    padding-left: 10px;
+    z-index: 1;
+    color: #334b5d;
+    text-align: left;
+}
+
+html #tb-utama #tb-menu ul.topnav li ul.subnav li a:hover {
+    z-index: 1;
+    color: #000000;
+    background: #a1b2bf;
+}
+
+#tb-utama #tb-tanggal
+{
+    width: auto;
+    margin: 0 0;
+    padding: 2px 5px;
+    float: right;
+    color: #FFFFFF;
+    line-height: 25px;
+}
+
+#tb-utama #tb-tanggal a.logout
+{
+    color: #FFFFFF;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+#tb-utama #tb-tanggal a.logout:hover
+{
+    color: #e1b76f;
+    text-decoration: none;
+}

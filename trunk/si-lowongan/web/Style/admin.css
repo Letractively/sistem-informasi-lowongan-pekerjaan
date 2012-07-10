@@ -1,0 +1,293 @@
+@charset "utf-8";
+/* CSS Document */
+
+body
+{
+    margin: 5px;
+    padding: 0 0 0 0;
+    background: rgb(255,242,170);
+    color: #000000;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    text-decoration: none;
+}
+
+h1, h2, h3, h4, h5
+{
+    font-family: "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+    text-decoration: none;
+    margin: 5px 0 10px 0;
+    padding: 0 0 3px 0;
+    font-weight: normal;
+}
+
+h1
+{
+    color: #497ea4;
+}
+
+h2
+{
+    color: #4f6b74;
+    border-bottom: dotted 1px #4f6b74;
+}
+
+a
+{
+    font-weight: normal;
+    text-decoration: none;
+    color: #2672a7;
+}
+
+a:hover
+{
+    text-decoration: none;
+    color: #a72626;
+}
+
+.clearer
+{
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    clear: both;
+}
+
+#wrapper
+{
+    margin: 0 auto;
+    padding: 0 0 0 0;
+    width: 80%;
+    background: #FFFFFF;
+}
+
+#top-heading
+{
+    width: auto;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    background-image:-moz-linear-gradient(top, rgb(255,243,174), #ffffff);
+    background-image:-webkit-gradient(linear,left bottom,left top,color-stop(0, #00f),color-stop(1, #0dF));
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr '#00f', endColorstr '#0dF');
+    -ms-filter:"progid:DXImageTransform.Microsoft.gradient(startColorstr '#00f', endColorstr '#0dF')";
+    height: 160px;
+}
+#container
+{
+    width: auto;
+    margin: 5px 0 0 0;
+    padding: 5px 10px;
+    min-height: 300px !important;
+    border: solid 1px #a1b0b2;
+}
+
+#footer
+{
+    width: auto;
+    margin: 5px 0 0 0;
+    padding: 5px 10px;
+    height: auto;
+    text-align: center;
+    text-decoration: none;
+    color: #FFFFFF;
+    font-size: 12px;
+    background-image:-moz-linear-gradient(top, rgb(220,220,220),rgb(150,150,150));
+
+}
+
+#footer p
+{
+    margin: 0 0 0 0;
+    line-height: 12px;
+}
+
+#login
+{
+    margin: 100px auto;
+    padding: 5px;
+    width: 350px;
+}
+
+table.formdata
+{
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    border: dotted 1px #7a8d90;
+}
+
+table.formdata th, table.formdata td
+{
+    padding: 5px 10px;
+    text-align: left;
+    vertical-align: top;
+}
+
+table.formdata th
+{
+    background: #bcc3c4;
+}
+
+table.formdata td
+{
+    background: #e2e4e4;
+}
+
+table.formdata td.bottom
+{
+    background: #6e7778;
+    padding: 10px;
+}
+
+table.griddata
+{
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    border: dotted 1px #7a8d90;
+}
+
+table.griddata th, table.griddata td
+{
+    padding: 5px 10px;
+}
+
+table.griddata th
+{
+    background: #bcc3c4;
+}
+
+table.griddata td.bottom
+{
+    background: #6e7778;
+    padding: 10px;
+}
+
+
+/* --- Loader ---*/
+
+div.loader {
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    border: none;
+}
+
+/* Form Error */
+div.errors
+{
+    color: #FF0000;
+    font-size: 10px;
+    margin: 0 0 2px 0;
+}
+
+/* spacer */
+
+.spacer5px
+{
+    height: 5px;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+}
+
+.required
+{
+    color: #FF0000;
+    margin: 0 0 0 5px;
+}
+
+/* Form */
+
+input[type=text], input[type=password], textarea
+{
+    font-size: 11px;
+    border: solid 1px #6b6b6b;
+    padding: 1px;
+    background: #f6f6f6;
+    color: #484d54;
+}
+
+input[type=submit], input[type=button], input[type=reset]
+{
+    font-size: 12px;
+    color: #5b6a86;
+    font-weight: bold;
+    padding: 3px 5px;
+}
+
+input[readonly]
+{
+    border: 1px solid #847661;
+    background: #f6f2ed;
+}
+
+input[disabled]
+{
+    border: 1px solid #847661;
+    background: #f6f2ed;
+}
+
+select, option
+{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11px;
+}
+
+/* End Of Form */
+
+.float-left
+{
+    float: left;
+}
+
+.float-right
+{
+    float: right;
+}
+
+h3.judul a
+{
+    font-size: 16px;
+    font-weight: normal;
+    border-bottom: 1px dotted #e6ca5b;
+}
+
+.ganjil
+{
+    background: #edf3f4;
+}
+
+.genap
+{
+    background: #d7e0e1;
+}
+
+.contents
+{
+    width: auto;
+    margin: 0 0 0 0;
+    padding: 3px;
+    border: dotted 1px #e6ca5b;
+    height: 300px;
+    overflow: auto;
+}
+.judul
+{
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.numeric
+{
+    text-align: right;
+}
+
+.linkbutton
+{
+    padding: 5px 5px;
+    background: #999999;
+    color: #000000;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.linkbutton:hover
+{
+    color: #FFFFFF;
+}
