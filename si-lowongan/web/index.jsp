@@ -32,8 +32,8 @@
                         </li>  
                         <li><a href="#">Commpany Info</a>
                             <ul style="display: none;" class="subnav">
-                                <li><a href="#">Job Titte</a></li>
-                                <li><a href="#">Job Spesification</a></li>
+                                <li><a href="#">About US</a></li>
+                                <li><a href="#">Contact US</a></li>
                             </ul>
                         </li>    
                     </ul>
