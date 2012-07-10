@@ -45,7 +45,7 @@
             </div>
             <div id="container">
             </div>
-            <div id="footer">
+            <div id="footer" >
                 Proyek Sistem Informasi Lowongan Pekerjaan - Teknologi Persistance<br/>
                 Fakultas Teknologi Informasi<br/>
                 Universitas Kristen Satya Wacana
