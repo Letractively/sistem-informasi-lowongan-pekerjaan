@@ -1,3 +1,4 @@
+<%@page import="entity.User"%>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -10,14 +11,26 @@
         <script src="Script/jquery-ui-custom.js" language="javascript" type="text/javascript"></script>
         <script src="Script/app-common.js" language="javascript" type="text/javascript"></script>
     </head>
+    <%
+        HttpSession mySession = request.getSession();
+        User user;
+        try {
+            user = (User) mySession.getAttribute("user");
+        } catch (Exception e) {
+            user = null;
+        }
+    %>
     <body>
         <div id="wrapper">
             <div id="top-heading">
-            </div>
+            </div>  
             <div id="tb-utama">
                 <div id="tb-menu">
                     <ul class="topnav">
                         <li id="first"><a href="index.jsp">Home</a></li>
+                        <%
+                            if (user != null) {
+                        %>
                         <li><a href="#">Recruitment</a>
                             <ul style="display: none;" class="subnav">
                                 <li><a href="#">Job Vacancies</a></li>
@@ -36,14 +49,58 @@
                                 <li><a href="#">Contact US</a></li>
                             </ul>
                         </li>    
+                        <%                            }
+                        %>
                     </ul>
                 </div>
                 <div id="tb-tanggal">
-			<a href="Logout" class="logout" id="logout">Logout</a> |
+                    <a href="Logout" class="logout" id="logout">Logout</a> |
                 </div>
                 <div class="clearer"></div>
             </div>
             <div id="container">
+                <%
+                    if (user == null) {
+                %>
+                <form action="Login" method="post">
+                    <table>
+                        <tr>
+                            <td colspan="2">
+                                <%
+                                    boolean emptyField = false;
+                                    boolean validasi = true;
+                                    try {
+                                        emptyField = (Boolean) request.getAttribute("emptyField");
+                                        if (emptyField) {
+                                            out.println(request.getAttribute("warning").toString());
+                                        } else {
+
+                                            validasi = (Boolean) request.getAttribute("validasiLogin");
+                                            if (!validasi) {
+                                                out.println("Invalid Username or Password ");
+                                            }
+                                        }
+                                    } catch (Exception e) {
+                                    }
+                                %>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Username</td>
+                            <td><input type="text" name="id_user"/></td>
+                        </tr>
+                        <tr>
+                            <td>Password</td>
+                            <td><input type="password" name="password"/></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" align="right"><input type="submit" name="submit" value="Login"/></td>
+                        </tr>                           
+                    </table>
+                </form>
+                <%
+                    }
+                %>
             </div>
             <div id="footer" >
                 Proyek Sistem Informasi Lowongan Pekerjaan - Teknologi Persistance<br/>

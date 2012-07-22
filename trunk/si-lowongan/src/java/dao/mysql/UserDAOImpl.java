@@ -6,7 +6,6 @@ package dao.mysql;
 
 import dao.IUserDAO;
 import entity.User;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -38,16 +37,27 @@ public class UserDAOImpl extends GeneralDAOImpl implements IUserDAO {
         return list;
     }
 
-//    public static void main(String[] args) {
-//        try {
-//            EntityManagerFactory emf =
-//                    Persistence.createEntityManagerFactory("si-lowonganPU");
-//            EntityManager em = emf.createEntityManager();
-//            
-//            List<User> listUser = new UserDAOImpl(em).gets();
-//            System.out.println("size : " + listUser.size());
-//        } catch (Exception ex) {
-//            Logger.getLogger(UserDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//    }
+    public static void main(String[] args) {
+        EntityManagerFactory emf =
+                Persistence.createEntityManagerFactory("si-lowonganPU");
+        EntityManager em = emf.createEntityManager();
+        try {
+
+            List<User> listUser = new UserDAOImpl(em).gets();
+            System.out.println("size : " + listUser.size());
+        } catch (Exception ex) {
+        }
+
+        UserDAOImpl d = new UserDAOImpl(em);
+        
+        User user = new User();
+        user.setIdUser("admin");
+        user.setPassword("admin");
+        user.setDateCreate(new Date());
+        try {
+            d.insert(user);
+        } catch (Exception ex) {
+            Logger.getLogger(UserDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }
