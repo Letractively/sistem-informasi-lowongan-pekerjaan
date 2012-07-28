@@ -24,7 +24,7 @@ public class ScheduleInterviewImpl extends GeneralDAOImpl implements IScheduleIn
         List<ScheduleInterview> list = new ArrayList<ScheduleInterview>();
         try {
             this.em.getTransaction().begin();
-            list = this.em.createQuery("SELECT s FROM ScheduleInterview").getResultList();
+            list = this.em.createQuery("SELECT s FROM ScheduleInterview s").getResultList();
             this.em.getTransaction().commit();
         } catch (Exception ex) {
             throw ex;
