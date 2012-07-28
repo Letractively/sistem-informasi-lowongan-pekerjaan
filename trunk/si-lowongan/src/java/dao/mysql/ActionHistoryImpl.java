@@ -24,7 +24,7 @@ public class ActionHistoryImpl extends GeneralDAOImpl implements IActionHistoryD
         List<ActionHistory> list = new ArrayList<ActionHistory>();
         try {
             this.em.getTransaction().begin();
-            list = this.em.createQuery("SELECT ah FROM ah").getResultList();
+            list = this.em.createQuery("SELECT ah FROM ActionHistory ah").getResultList();
             this.em.getTransaction().commit();
         } catch (Exception ex) {
             throw ex;

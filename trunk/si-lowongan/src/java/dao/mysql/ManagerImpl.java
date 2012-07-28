@@ -24,7 +24,7 @@ public class ManagerImpl extends GeneralDAOImpl implements IManagerDAO {
         List<Manager> list = new ArrayList<Manager>();
         try {
             this.em.getTransaction().begin();
-            list = this.em.createQuery("SELECT m FROM Manager").getResultList();
+            list = this.em.createQuery("SELECT m FROM Manager m").getResultList();
             this.em.getTransaction().commit();
         } catch (Exception ex) {
             throw ex;

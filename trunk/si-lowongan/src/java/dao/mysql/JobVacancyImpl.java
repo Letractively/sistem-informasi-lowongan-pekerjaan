@@ -24,7 +24,7 @@ public class JobVacancyImpl extends GeneralDAOImpl implements IJobVacancyDAO{
         List<JobVacancy> list = new ArrayList<JobVacancy>();
         try {
             this.em.getTransaction().begin();
-            list = this.em.createQuery("SELECT ja FROM JobVacany").getResultList();
+            list = this.em.createQuery("SELECT ja FROM JobVacancy ja").getResultList();
             this.em.getTransaction().commit();
         } catch (Exception ex) {
             throw ex;

@@ -24,7 +24,7 @@ public class ApplicantsImpl extends GeneralDAOImpl implements IApplicantsDAO{
         List<Applicants> list = new ArrayList<Applicants>();
         try {
             this.em.getTransaction().begin();
-            list = this.em.createQuery("SELECT a FROM Applicants").getResultList();
+            list = this.em.createQuery("SELECT a FROM Applicants a").getResultList();
             this.em.getTransaction().commit();
         } catch (Exception ex) {
             throw ex;

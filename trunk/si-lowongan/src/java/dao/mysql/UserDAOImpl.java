@@ -5,6 +5,7 @@
 package dao.mysql;
 
 import dao.IUserDAO;
+import entity.Job;
 import entity.User;
 import java.util.ArrayList;
 import java.util.Date;
@@ -41,23 +42,24 @@ public class UserDAOImpl extends GeneralDAOImpl implements IUserDAO {
         EntityManagerFactory emf =
                 Persistence.createEntityManagerFactory("si-lowonganPU");
         EntityManager em = emf.createEntityManager();
-        try {
-
-            List<User> listUser = new UserDAOImpl(em).gets();
-            System.out.println("size : " + listUser.size());
-        } catch (Exception ex) {
-        }
-
-        UserDAOImpl d = new UserDAOImpl(em);
+//        try {
+//
+//            List<User> listUser = new UserDAOImpl(em).gets();
+//            System.out.println("size : " + listUser.size());
+//        } catch (Exception ex) {
+//        }
+//
+//        UserDAOImpl d = new UserDAOImpl(em);
+//        
+//        User user = new User();
+//        user.setIdUser("admin");
+//        user.setPassword("admin");
+//        user.setDateCreate(new Date());
+//        try {
+//            d.insert(user);
+//        } catch (Exception ex) {
+//            Logger.getLogger(UserDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+//        }
         
-        User user = new User();
-        user.setIdUser("admin");
-        user.setPassword("admin");
-        user.setDateCreate(new Date());
-        try {
-            d.insert(user);
-        } catch (Exception ex) {
-            Logger.getLogger(UserDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 }
