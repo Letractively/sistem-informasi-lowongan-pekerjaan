@@ -14,12 +14,12 @@ import javax.persistence.EntityManager;
  *
  * @author WILLIAM
  */
-public class JobVacancyImpl extends GeneralDAOImpl implements IJobVacancyDAO{
+public class JobVacancyImpl extends GeneralDAOImpl implements IJobVacancyDAO {
 
-    public JobVacancyImpl(EntityManager em){
+    public JobVacancyImpl(EntityManager em) {
         super(em);
     }
-    
+
     public List<JobVacancy> gets() throws Exception {
         List<JobVacancy> list = new ArrayList<JobVacancy>();
         try {
@@ -31,5 +31,12 @@ public class JobVacancyImpl extends GeneralDAOImpl implements IJobVacancyDAO{
         }
         return list;
     }
-    
+
+    public JobVacancy get(String id) throws Exception {
+        JobVacancy jv = new JobVacancy();
+        this.em.getTransaction().begin();
+        jv = (JobVacancy) this.em.createQuery("SELECT ja FROM JobVacancy ja WHERE ja.idJobVacancy = '" + id + "'").getSingleResult();
+        this.em.getTransaction().commit();
+        return jv;
+    }
 }
