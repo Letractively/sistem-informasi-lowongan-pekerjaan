@@ -8,7 +8,6 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -17,7 +16,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -34,7 +32,6 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "JobVacancy.findAll", query = "SELECT j FROM JobVacancy j"),
     @NamedQuery(name = "JobVacancy.findByIdJobVacancy", query = "SELECT j FROM JobVacancy j WHERE j.idJobVacancy = :idJobVacancy"),
-    @NamedQuery(name = "JobVacancy.findByIdJob", query = "SELECT j FROM JobVacancy j WHERE j.idJob = :idJob"),
     @NamedQuery(name = "JobVacancy.findByDescription", query = "SELECT j FROM JobVacancy j WHERE j.description = :description"),
     @NamedQuery(name = "JobVacancy.findByPostDate", query = "SELECT j FROM JobVacancy j WHERE j.postDate = :postDate"),
     @NamedQuery(name = "JobVacancy.findByStatus", query = "SELECT j FROM JobVacancy j WHERE j.status = :status"),
@@ -46,9 +43,6 @@ public class JobVacancy implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_job_vacancy")
     private String idJobVacancy;
-    @Basic(optional = false)
-    @Column(name = "id_job")
-    private String idJob;
     @Basic(optional = false)
     @Column(name = "description")
     private String description;
@@ -70,11 +64,9 @@ public class JobVacancy implements Serializable {
     @JoinColumn(name = "id_manager", referencedColumnName = "id_manager")
     @ManyToOne(optional = false)
     private Manager idManager;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "jobVacancy1")
-    private JobVacancy jobVacancy;
-    @JoinColumn(name = "id_job_vacancy", referencedColumnName = "id_job_vacancy", insertable = false, updatable = false)
-    @OneToOne(optional = false)
-    private JobVacancy jobVacancy1;
+    @JoinColumn(name = "id_job", referencedColumnName = "id_job")
+    @ManyToOne(optional = false)
+    private Job idJob;
 
     public JobVacancy() {
     }
@@ -83,9 +75,8 @@ public class JobVacancy implements Serializable {
         this.idJobVacancy = idJobVacancy;
     }
 
-    public JobVacancy(String idJobVacancy, String idJob, String description, Date postDate, String status, String titleVacancy, int numberPosition) {
+    public JobVacancy(String idJobVacancy, String description, Date postDate, String status, String titleVacancy, int numberPosition) {
         this.idJobVacancy = idJobVacancy;
-        this.idJob = idJob;
         this.description = description;
         this.postDate = postDate;
         this.status = status;
@@ -99,14 +90,6 @@ public class JobVacancy implements Serializable {
 
     public void setIdJobVacancy(String idJobVacancy) {
         this.idJobVacancy = idJobVacancy;
-    }
-
-    public String getIdJob() {
-        return idJob;
-    }
-
-    public void setIdJob(String idJob) {
-        this.idJob = idJob;
     }
 
     public String getDescription() {
@@ -166,20 +149,12 @@ public class JobVacancy implements Serializable {
         this.idManager = idManager;
     }
 
-    public JobVacancy getJobVacancy() {
-        return jobVacancy;
+    public Job getIdJob() {
+        return idJob;
     }
 
-    public void setJobVacancy(JobVacancy jobVacancy) {
-        this.jobVacancy = jobVacancy;
-    }
-
-    public JobVacancy getJobVacancy1() {
-        return jobVacancy1;
-    }
-
-    public void setJobVacancy1(JobVacancy jobVacancy1) {
-        this.jobVacancy1 = jobVacancy1;
+    public void setIdJob(Job idJob) {
+        this.idJob = idJob;
     }
 
     @Override
@@ -204,7 +179,7 @@ public class JobVacancy implements Serializable {
 
     @Override
     public String toString() {
-        return "entitas.JobVacancy[ idJobVacancy=" + idJobVacancy + " ]";
+        return "entity.JobVacancy[ idJobVacancy=" + idJobVacancy + " ]";
     }
     
 }
