@@ -1,0 +1,13 @@
+ALTER TABLE applicants DROP FOREIGN KEY FK_applicants_id_job_vacancy
+ALTER TABLE schedule_interview DROP FOREIGN KEY FK_schedule_interview_id_applicants
+ALTER TABLE job_vacancy DROP FOREIGN KEY FK_job_vacancy_id_job
+ALTER TABLE job_vacancy DROP FOREIGN KEY FK_job_vacancy_id_manager
+ALTER TABLE action_history DROP FOREIGN KEY FK_action_history_id_applicants
+ALTER TABLE action_history DROP FOREIGN KEY FK_action_history_id_user
+DROP TABLE applicants
+DROP TABLE manager
+DROP TABLE schedule_interview
+DROP TABLE job_vacancy
+DROP TABLE job
+DROP TABLE user
+DROP TABLE action_history
