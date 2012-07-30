@@ -171,7 +171,7 @@ public class ScheduleInterview implements Serializable {
 
     @Override
     public String toString() {
-        return "entitas.ScheduleInterview[ idScheduleInterview=" + idScheduleInterview + " ]";
+        return "entity.ScheduleInterview[ idScheduleInterview=" + idScheduleInterview + " ]";
     }
     
 }

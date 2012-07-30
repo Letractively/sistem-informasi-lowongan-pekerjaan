@@ -5,14 +5,18 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -34,6 +38,8 @@ public class Job implements Serializable {
     @Basic(optional = false)
     @Column(name = "job_title")
     private String jobTitle;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idJob")
+    private Collection<JobVacancy> jobVacancyCollection;
 
     public Job() {
     }
@@ -63,6 +69,15 @@ public class Job implements Serializable {
         this.jobTitle = jobTitle;
     }
 
+    @XmlTransient
+    public Collection<JobVacancy> getJobVacancyCollection() {
+        return jobVacancyCollection;
+    }
+
+    public void setJobVacancyCollection(Collection<JobVacancy> jobVacancyCollection) {
+        this.jobVacancyCollection = jobVacancyCollection;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -85,7 +100,7 @@ public class Job implements Serializable {
 
     @Override
     public String toString() {
-        return "entitas.Job[ idJob=" + idJob + " ]";
+        return "entity.Job[ idJob=" + idJob + " ]";
     }
     
 }

@@ -100,7 +100,7 @@ public class Manager implements Serializable {
 
     @Override
     public String toString() {
-        return "entitas.Manager[ idManager=" + idManager + " ]";
+        return "entity.Manager[ idManager=" + idManager + " ]";
     }
     
 }

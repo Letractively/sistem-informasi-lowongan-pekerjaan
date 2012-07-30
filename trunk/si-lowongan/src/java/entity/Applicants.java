@@ -259,7 +259,7 @@ public class Applicants implements Serializable {
 
     @Override
     public String toString() {
-        return "entitas.Applicants[ idApplicants=" + idApplicants + " ]";
+        return "entity.Applicants[ idApplicants=" + idApplicants + " ]";
     }
     
 }

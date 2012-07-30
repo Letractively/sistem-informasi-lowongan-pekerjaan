@@ -1,3 +1,9 @@
+<%@page import="dao.mysql.ManagerImpl"%>
+<%@page import="entity.Job"%>
+<%@page import="dao.mysql.JobImpl"%>
+<%@page import="java.util.List"%>
+<%@page import="javax.persistence.EntityManager"%>
+<%@page import="servlet.Manager"%>
 <%@page import="entity.User"%>
 <html>
     <head>
@@ -14,11 +20,19 @@
     <%
         HttpSession mySession = request.getSession();
         User user;
+
+        Manager manager = new Manager();
+        EntityManager em = manager.getEntityManager();
+
         try {
             user = (User) mySession.getAttribute("user");
         } catch (Exception e) {
             user = null;
         }
+
+        if (user != null) {
+            List<Job> listJob = new JobImpl(em).gets();
+            List<entity.Manager> listManager = new ManagerImpl(em).gets();
     %>
     <body>
         <div id="wrapper">
@@ -28,9 +42,6 @@
                 <div id="tb-menu">
                     <ul class="topnav">
                         <li id="first"><a href="index.jsp">Home</a></li>
-                        <%
-                            if (user != null) {
-                        %>
                         <li><a href="#">Recruitment</a>
                             <ul style="display: none;" class="subnav">
                                 <li><a href="job_vacancies.jsp">Job Vacancies</a></li>
@@ -49,8 +60,7 @@
                                 <li><a href="#">Contact US</a></li>
                             </ul>
                         </li>    
-                        <%                            }
-                        %>
+
                     </ul>
                 </div>
                 <div id="tb-tanggal">
@@ -59,48 +69,58 @@
                 <div class="clearer"></div>
             </div>
             <div id="container">
-                <%
-                    if (user == null) {
-                %>
-                <form action="Login" method="post">
+                <h3>Add Job Vacancy</h3>
+                <form action="JobVacancy" method="POST">
                     <table>
                         <tr>
-                            <td colspan="2">
-                                <%
-                                    boolean emptyField = false;
-                                    boolean validasi = true;
-                                    try {
-                                        emptyField = (Boolean) request.getAttribute("emptyField");
-                                        if (emptyField) {
-                                            out.println(request.getAttribute("warning").toString());
-                                        } else {
-
-                                            validasi = (Boolean) request.getAttribute("validasiLogin");
-                                            if (!validasi) {
-                                                out.println("Invalid Username or Password ");
-                                            }
+                            <td>Job Title</td>
+                            <td>
+                                <select name="job_titles">
+                                    <%
+                                        for (Job job : listJob) {
+                                            out.println("<option value='" + job.getIdJob() + "'>"
+                                                    + job.getJobTitle() + "</option>");
                                         }
-                                    } catch (Exception e) {
-                                    }
-                                %>
+                                    %>
+                                </select>
                             </td>
                         </tr>
                         <tr>
-                            <td>Username</td>
-                            <td><input type="text" name="id_user"/></td>
+                            <td>Vacancy Name</td>
+                            <td><input type="text" name="txt_vacancy_name" value=""/></td>
                         </tr>
                         <tr>
-                            <td>Password</td>
-                            <td><input type="password" name="password"/></td>
+                            <td>Hiring Manager</td>
+                            <td>
+                                <select name="hiring_manager">
+                                    <%
+                                        for (entity.Manager mgr : listManager) {
+                                            out.println("<option value='" + mgr.getIdManager() + "'>"
+                                                    + mgr.getNamaManager() + "</option>");
+                                        }
+                                    %>
+                                </select>
+                            </td>
                         </tr>
                         <tr>
-                            <td colspan="2" align="right"><input type="submit" name="submit" value="Login"/></td>
-                        </tr>                           
+                            <td>Number Of Positions</td>
+                            <td><input type="text" name="txt_number_pos" value=""/></td>
+                        </tr>
+                        <tr>
+                            <td>Description</td>
+                            <td><textarea name="txt_description" rows="5" cols="50"></textarea></td>
+                        </tr>
+                        <tr>
+                            <td>Active</td>
+                            <td><input type="checkbox" name="cbx_active" value=""/></td>
+                        </tr>
+                        <tr>
+                            <td><input type="submit" name="submit_job_vacancy" value="submit"/></td>
+                        </tr>
+                        
                     </table>
+
                 </form>
-                <%
-                    }
-                %>
             </div>
             <div id="footer" >
                 Proyek Sistem Informasi Lowongan Pekerjaan - Teknologi Persistance<br/>
@@ -109,4 +129,8 @@
             </div>
         </div>
     </body>
+    <%                            } else {
+            response.sendRedirect("index.jsp");
+        }
+    %>
 </html>
