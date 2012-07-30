@@ -83,6 +83,7 @@
                             <td>Job Title</td>
                             <td>
                                 <select name="job_titles">
+                                    <option value="all">All</option>
                                     <%
                                         for (Job job : listJob) {
                                             out.println("<option value='" + job.getIdJob() + "'>"
@@ -96,6 +97,7 @@
                             </td>
                             <td>
                                 <select name="vacancy">
+                                    <option value="all">All</option>
                                     <%
                                         for (JobVacancy jobVacancy : listJobVacancy) {
                                             out.println("<option value=\""
@@ -110,6 +112,7 @@
                             </td>
                             <td>
                                 <select name="hiring_manager">
+                                    <option value="all">All</option>
                                     <%
                                         for (entity.Manager mgr : listManager) {
                                             out.println("<option value='" + mgr.getIdManager() + "'>"
@@ -123,6 +126,7 @@
                             </td>
                             <td>
                                 <select name="status">
+                                    <option value="all">All</option>
                                     <option value="Active">Active</option>
                                     <option value="Inactive">Inactive</option>
                                 </select>
@@ -150,31 +154,69 @@
                         </tr>
                         <%
                             if (objResult != null) {
+                                boolean result = false;
+                                boolean show = false;
                                 for (JobVacancy jobVacancy : listJobVacancy) {
-                                    out.println("<tr>");
-                                    boolean result = false;
-                                    if (jobVacancy.getIdJob().getIdJob().equals(objResult[0])
-                                            && jobVacancy.getTitleVacancy().equals(objResult[1])
-                                            && jobVacancy.getIdManager().getIdManager().equals(objResult[2])
-                                            && jobVacancy.getStatus().equals(objResult[3])) {
+                                    if (objResult[0].equalsIgnoreCase("all")) {
+                                        show = true;
+                                    } else {
+                                        if (jobVacancy.getIdJob().getIdJob().equals(objResult[0])) {
+                                            show = true;
+                                        } else {
+                                            show = false;
+                                            continue;
+                                        }
+
+                                    }
+                                    if (objResult[1].equalsIgnoreCase("all")) {
+                                        show = true;
+                                    } else {
+                                        if (jobVacancy.getTitleVacancy().equals(objResult[1])) {
+                                            show = true;
+                                        } else {
+                                            show = false;
+                                            continue;
+                                        }
+                                    }
+                                    if (objResult[2].equalsIgnoreCase("all")) {
+                                        show = true;
+                                    } else {
+                                        if (jobVacancy.getIdManager().getIdManager().equals(objResult[2])) {
+                                            show = true;
+                                        } else {
+                                            show = false;
+                                            continue;
+                                        }
+                                    }
+                                    if (objResult[3].equalsIgnoreCase("all")) {
+                                        show = true;
+                                    } else {
+                                        if (jobVacancy.getStatus().equals(objResult[3])) {
+                                            show = true;
+                                        } else {
+                                            show = false;
+                                            continue;
+                                        }
+                                    }
+
+                                    if (show) {
+                                        out.println("<tr>");
                                         out.println("<td><input type=\"checkbox\" name=\"delete\" value=\""
                                                 + jobVacancy.getIdJobVacancy() + "\"/></td>");
                                         out.println("<td><a href=JobVacancyProcess?id="
                                                 + jobVacancy.getIdJobVacancy() + ">"
                                                 + jobVacancy.getTitleVacancy() + "</a></td>");
-                                        out.println("<td>" + jobVacancy.getIdJobVacancy()
+                                        out.println("<td>" + jobVacancy.getIdJob().getJobTitle()
                                                 + "</td>");
                                         out.println("<td>" + jobVacancy.getIdManager().getNamaManager()
                                                 + "</td>");
                                         out.println("<td>" + jobVacancy.getStatus() + "</td>");
                                         result = true;
-                                    } else {
-                                        if (!result) {
-                                            out.println("<td colspan=\"5\">No Result<td>");
-                                        }
-                                        break;
+                                        out.println("</tr>");
                                     }
-                                    out.println("</tr>");
+                                }
+                                if (!result) {
+                                    out.println("<tr><td colspan=\"5\">No Result<td></tr>");
                                 }
                             } else {
                                 for (JobVacancy jobVacancy : listJobVacancy) {
