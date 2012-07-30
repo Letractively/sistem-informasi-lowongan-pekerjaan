@@ -104,6 +104,7 @@ public class Login extends HttpServlet {
         if (emptyField) {
             request.setAttribute("emptyField", emptyField);
             request.setAttribute("warning", warning);
+            rd = request.getRequestDispatcher("index.jsp");
             rd.forward(request, response);
         }
 

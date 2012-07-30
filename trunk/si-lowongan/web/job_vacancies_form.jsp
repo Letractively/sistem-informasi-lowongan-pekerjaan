@@ -1,3 +1,4 @@
+<%@page import="entity.JobVacancy"%>
 <%@page import="dao.mysql.ManagerImpl"%>
 <%@page import="entity.Job"%>
 <%@page import="dao.mysql.JobImpl"%>
@@ -33,6 +34,11 @@
         if (user != null) {
             List<Job> listJob = new JobImpl(em).gets();
             List<entity.Manager> listManager = new ManagerImpl(em).gets();
+            JobVacancy jv = null;
+            try {
+                jv = (JobVacancy) request.getAttribute("jobVacancy");
+            } catch (Exception ex) {
+            }
     %>
     <body>
         <div id="wrapper">
@@ -68,18 +74,35 @@
                 </div>
                 <div class="clearer"></div>
             </div>
-            <div id="container">
-                <h3>Add Job Vacancy</h3>
-                <form action="JobVacancy" method="POST">
+            <div id="container">                
+                <h3>Job Vacancy</h3>
+                <form action="JobVacancyProcess" method="POST">
                     <table>
                         <tr>
                             <td>Job Title</td>
                             <td>
+                                <%
+                                    if (jv != null) {
+                                        out.println("<input type=\"hidden\" name=\"id_job_vacancy\" value=\"" + jv.getIdJobVacancy() + "\"/>");
+                                    }
+                                %>
                                 <select name="job_titles">
                                     <%
                                         for (Job job : listJob) {
-                                            out.println("<option value='" + job.getIdJob() + "'>"
+                                            out.println("<option value=\"" + job.getIdJob() + "\">"
                                                     + job.getJobTitle() + "</option>");
+                                        }
+
+                                        if (jv != null) {
+                                            for (Job job : listJob) {
+                                                if (job.getIdJob() == jv.getIdJob().getIdJob()) {
+                                                    out.println("<option value=\"" + job.getIdJob() + "\" select>"
+                                                            + job.getJobTitle() + "</option>");
+                                                } else {
+                                                    out.println("<option value=\"" + job.getIdJob() + "\">"
+                                                            + job.getJobTitle() + "</option>");
+                                                }
+                                            }
                                         }
                                     %>
                                 </select>
@@ -87,37 +110,89 @@
                         </tr>
                         <tr>
                             <td>Vacancy Name</td>
-                            <td><input type="text" name="txt_vacancy_name" value=""/></td>
+                            <td>
+                                <%
+                                    if (jv == null) {
+                                        out.println("<input type=\"text\" "
+                                                + "name=\"txt_vacancy_name\"/>");
+                                    } else {
+                                        out.println("<input type=\"text\" "
+                                                + "name=\"txt_vacancy_name\" "
+                                                + "value=\""
+                                                + jv.getTitleVacancy() + "\"/>");
+                                    }
+                                %>
+                            </td>
                         </tr>
                         <tr>
                             <td>Hiring Manager</td>
                             <td>
                                 <select name="hiring_manager">
                                     <%
-                                        for (entity.Manager mgr : listManager) {
-                                            out.println("<option value='" + mgr.getIdManager() + "'>"
-                                                    + mgr.getNamaManager() + "</option>");
+                                        if (jv == null) {
+                                            for (entity.Manager mgr : listManager) {
+                                                out.println("<option value='" + mgr.getIdManager() + "'>"
+                                                        + mgr.getNamaManager() + "</option>");
+                                            }
+                                        } else {
+                                            for (entity.Manager mgr : listManager) {
+                                                if ((mgr.getIdManager().equals(jv.getIdManager().getIdManager()))) {
+                                                    out.println("<option value='" + mgr.getIdManager() + "' select>"
+                                                            + mgr.getNamaManager() + "</option>");
+                                                } else {
+                                                    out.println("<option value='" + mgr.getIdManager() + "'>"
+                                                            + mgr.getNamaManager() + "</option>");
+                                                }
+                                            }
                                         }
                                     %>
                                 </select>
                             </td>
                         </tr>
                         <tr>
-                            <td>Number Of Positions</td>
-                            <td><input type="text" name="txt_number_pos" value=""/></td>
+                            <td>Number Of Positions</td>                            
+                            <td>
+                                <%
+                                    if (jv == null) {
+                                        out.println("<input type=\"text\" name=\"txt_number_pos\">");
+                                    } else {
+                                        out.println("<input type=\"text\" name=\"txt_number_pos\" value = \"" + jv.getNumberPosition() + "\">");
+                                    }
+                                %>
+                            </td>
                         </tr>
                         <tr>
                             <td>Description</td>
-                            <td><textarea name="txt_description" rows="5" cols="50"></textarea></td>
+                            <td>
+                                <%
+                                    if (jv == null) {
+                                        out.println("<textarea name=\"txt_description\" rows=\"5\" cols=\"50\"></textarea>");
+                                    } else {
+                                        out.println("<textarea name=\"txt_description\" rows=\"5\" cols=\"50\">" + jv.getDescription() + "</textarea>");
+                                    }
+                                %>
+                            </td>
                         </tr>
                         <tr>
                             <td>Active</td>
-                            <td><input type="checkbox" name="cbx_active" value=""/></td>
+                            <td>
+                                <%
+                                    if (jv == null) {
+                                        out.println("<input type=\"checkbox\" name=\"cbx_active\" value=\"Active\"/>");
+                                    } else {
+                                        if (jv.getStatus().equals("Active")) {
+                                            out.println("<input type=\"checkbox\" name=\"cbx_active\" value=\"Active\" checked/>");
+                                        } else {
+                                            out.println("<input type=\"checkbox\" name=\"cbx_active\" value=\"Active\"/>");
+                                        }
+                                    }
+                                %>
+                            </td>
                         </tr>
                         <tr>
                             <td><input type="submit" name="submit_job_vacancy" value="submit"/></td>
                         </tr>
-                        
+
                     </table>
 
                 </form>

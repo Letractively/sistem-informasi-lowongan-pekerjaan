@@ -14,4 +14,6 @@ import java.util.List;
 public interface IJobVacancyDAO extends IGeneralDAO {
 
     public List<JobVacancy> gets() throws Exception;
+    
+    public JobVacancy get(String id) throws Exception;
 }

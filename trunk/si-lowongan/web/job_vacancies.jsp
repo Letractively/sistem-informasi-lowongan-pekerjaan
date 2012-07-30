@@ -36,9 +36,12 @@
         if (user != null) {
             List<Job> listJob = new JobImpl(em).gets();
             List<entity.Manager> listManager = new ManagerImpl(em).gets();
-            List<Applicants> listApplicants = new ApplicantsImpl(em).gets();
             List<JobVacancy> listJobVacancy = new JobVacancyImpl(em).gets();
-
+            String[] objResult = null;
+            try {
+                objResult = (String[]) request.getAttribute("objectResult");
+            } catch (Exception ex) {
+            }
     %>
     <body>
         <div id="wrapper">
@@ -74,7 +77,7 @@
                 <div class="clearer"></div>
             </div>
             <div id="container">
-                <form action="SearchVacancies" method="post">
+                <form action="JobVacancyProcess">
                     <table border="1">
                         <tr>
                             <td>Job Title</td>
@@ -93,7 +96,7 @@
                             </td>
                             <td>
                                 <select name="vacancy">
-                                     <%
+                                    <%
                                         for (JobVacancy jobVacancy : listJobVacancy) {
                                             out.println("<option value=\""
                                                     + jobVacancy.getTitleVacancy() + "\">"
@@ -120,18 +123,13 @@
                             </td>
                             <td>
                                 <select name="status">
-                                    <%
-                                        for (JobVacancy jobVacancy : listJobVacancy) {
-                                            out.println("<option value=\""
-                                                    + jobVacancy.getStatus() + "\">"
-                                                    + jobVacancy.getStatus() + "</option>");
-                                        }
-                                    %>
+                                    <option value="Active">Active</option>
+                                    <option value="Inactive">Inactive</option>
                                 </select>
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="2" align="right"><input type="submit" name="submit" value="Search"/></td>
+                            <td colspan="2" align="right"><input type="submit" name="manage_job_vacancy" value="search"/></td>
                         </tr>                           
                     </table>
                 </form>
@@ -142,26 +140,59 @@
                             <td><input type="submit" name="manage_job_vacancy" value="delete"/></td>
                         </tr>                    
                     </table>
-                    <table border="1">
+                    <table border="1" width="100%">
                         <tr>
-                            <td><input type="checkbox" name="" value="ON" /></td>
+                            <td><input type="checkbox" name="" value="ON" disabled  /></td>
                             <td>Vacancy</td>
                             <td>Job Titles</td>
                             <td>Hiring Manager</td>
                             <td>Status</td>
                         </tr>
                         <%
-                            for (JobVacancy jobVacancy : listJobVacancy) {
-                                out.println("<td><checkbox name=\"\" value=\"\"/></td>");
-                                out.println("<td><a href=JobVacancy?id=\""
-                                        + jobVacancy.getIdJobVacancy() + "\""
-                                        + jobVacancy.getTitleVacancy() + "</td>");
-                                out.println("<td>" + jobVacancy.getIdJobVacancy()
-                                        + "</td>");
-                                out.println("<td>" + jobVacancy.getIdManager().getNamaManager()
-                                        + "</td>");
-                                out.println("<td>" + jobVacancy.getStatus() + "</td>");
+                            if (objResult != null) {
+                                for (JobVacancy jobVacancy : listJobVacancy) {
+                                    out.println("<tr>");
+                                    boolean result = false;
+                                    if (jobVacancy.getIdJob().getIdJob().equals(objResult[0])
+                                            && jobVacancy.getTitleVacancy().equals(objResult[1])
+                                            && jobVacancy.getIdManager().getIdManager().equals(objResult[2])
+                                            && jobVacancy.getStatus().equals(objResult[3])) {
+                                        out.println("<td><input type=\"checkbox\" name=\"delete\" value=\""
+                                                + jobVacancy.getIdJobVacancy() + "\"/></td>");
+                                        out.println("<td><a href=JobVacancyProcess?id="
+                                                + jobVacancy.getIdJobVacancy() + ">"
+                                                + jobVacancy.getTitleVacancy() + "</a></td>");
+                                        out.println("<td>" + jobVacancy.getIdJobVacancy()
+                                                + "</td>");
+                                        out.println("<td>" + jobVacancy.getIdManager().getNamaManager()
+                                                + "</td>");
+                                        out.println("<td>" + jobVacancy.getStatus() + "</td>");
+                                        result = true;
+                                    } else {
+                                        if (!result) {
+                                            out.println("<td colspan=\"5\">No Result<td>");
+                                        }
+                                        break;
+                                    }
+                                    out.println("</tr>");
+                                }
+                            } else {
+                                for (JobVacancy jobVacancy : listJobVacancy) {
+                                    out.println("<tr>");
+                                    out.println("<td><input type=\"checkbox\" name=\"delete\" value=\""
+                                            + jobVacancy.getIdJobVacancy() + "\"/></td>");
+                                    out.println("<td><a href=JobVacancyProcess?id="
+                                            + jobVacancy.getIdJobVacancy() + ">"
+                                            + jobVacancy.getTitleVacancy() + "</a></td>");
+                                    out.println("<td>" + jobVacancy.getIdJob().getJobTitle()
+                                            + "</td>");
+                                    out.println("<td>" + jobVacancy.getIdManager().getNamaManager()
+                                            + "</td>");
+                                    out.println("<td>" + jobVacancy.getStatus() + "</td>");
+                                    out.println("</tr>");
+                                }
                             }
+
                         %>
                     </table>
                 </form>
