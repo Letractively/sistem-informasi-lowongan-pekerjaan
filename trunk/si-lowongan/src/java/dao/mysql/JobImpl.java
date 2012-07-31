@@ -36,16 +36,11 @@ public class JobImpl extends GeneralDAOImpl implements IJobDAO {
         return list;
     }
     
-    public static void main(String[] args) {
-        
-        EntityManagerFactory emf =
-                Persistence.createEntityManagerFactory("si-lowonganPU");
-        EntityManager em = emf.createEntityManager();
-        try {
-            List<Job> listJob = new JobImpl(em).gets();
-            System.out.println(listJob.size() + " : size");
-        } catch (Exception ex) {
-            Logger.getLogger(JobImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    public Job get(String id) throws Exception {
+        Job j = new Job();
+        this.em.getTransaction().begin();
+        j = (Job) this.em.createQuery("SELECT j FROM Job j WHERE j.idJob = '" + id + "'").getSingleResult();
+        this.em.getTransaction().commit();
+        return j;
     }
 }

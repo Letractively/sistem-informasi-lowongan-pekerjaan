@@ -41,6 +41,9 @@ public class Job implements Serializable {
     @Basic(optional = false)
     @Column(name = "job_title")
     private String jobTitle;
+    @Basic(optional = false)
+    @Column(name = "job_description")
+    private String jobDescription;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idJob")
     private Collection<JobVacancy> jobVacancyCollection;
 
@@ -71,16 +74,15 @@ public class Job implements Serializable {
     public void setJobTitle(String jobTitle) {
         this.jobTitle = jobTitle;
     }
-
-    @XmlTransient
-    public Collection<JobVacancy> getJobVacancyCollection() {
-        return jobVacancyCollection;
+    
+    public String getJobDescription(){
+        return jobDescription;
     }
-
-    public void setJobVacancyCollection(Collection<JobVacancy> jobVacancyCollection) {
-        this.jobVacancyCollection = jobVacancyCollection;
+    
+    public void setJobDescription(String jobDescription){
+        this.jobDescription = jobDescription;
     }
-
+    
     @Override
     public int hashCode() {
         int hash = 0;
