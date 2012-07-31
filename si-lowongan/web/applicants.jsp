@@ -20,6 +20,8 @@
     <%
                 HttpSession mySession = request.getSession(true);
                 List<Applicants> listApplicants = (List<Applicants>) mySession.getAttribute("listApplicants");
+
+                Boolean flagError = (Boolean) request.getAttribute("throwFlagError");
     %>
 
     <head>
@@ -60,23 +62,21 @@
                 <!-- start content -->
                 <div id="content">
                     <div class="post">
-                        <h2 class="title">
+                        <h2 class="title" >
                             Applicants
                         </h2>
 
                         <div class="entry">
                             <p>
                                 <%
-
-                                            if (listApplicants == null) {
-                                                out.println("buruk kosong");
-                                            } else {
-                                                out.println("tidak kosong!");
+                                            if (flagError != null) {
+                                                if (!flagError) {
+                                                    out.println("<h2 class=\"title\" style=\"color: red\">Status updated!</h2>");
+                                                }
                                             }
-
                                 %>
                                 <!-- Kerja dari sini -->
-                            <table border="0.5" cellspacing="17px" style="background-color: #CDCDCD; ">
+                            <table border="0.5" cellspacing="17px" width="600px" style="background-color: #CDCDCD; ">
 
                                 <tr>
                                     <td><b><u>Vacancy</u></b></td>
@@ -86,12 +86,12 @@
                                     <td><b><u>Status</u></b></td>
                                     <td><b><u>Resume</u></b></td>
 
-                                    <td colspan="3" align="center"><b><u>Action</u></b></td>
+                                    <td colspan="2" align="center"><b><u>Action</u></b></td>
                                 </tr>
                                 <%
                                             String fullName = "";
                                             SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-                                            String[] actionCombo = {"--Action--", "Applying", "Interview", "Pass Interview", "Hire"};
+                                            String[] actionCombo = {"--Action--", "Reject", "Applying", "Interview", "Pass Interview", "Hire"};
                                             for (Applicants a : listApplicants) {
                                                 out.print("<tr><td>" + a.getIdJobVacancy().getTitleVacancy() + "</td>");
 
@@ -103,28 +103,23 @@
                                                 if (a.getLastName() != null) {
                                                     fullName += " " + a.getLastName();
                                                 }
-                                                out.print("<tr><td>" + fullName + "</td>");
+                                                out.print("<td>" + fullName + "</td>");
 
 
                                                 out.print("<td>" + a.getIdJobVacancy().getIdManager().getNamaManager() + "</td>");
                                                 out.print("<td>" + formatter.format(a.getDateApply()) + "</td>");
                                                 out.print("<td>" + a.getStatus() + "</td>");
                                                 out.print("<td>download</td>");
-                                                /*out.print("<td colspan=\"2\"><select name=\"sel_applicants_acts\">"
+                                                out.print("<form action=\"ServletActionApplicants\"><td><select name=\"sel_applicants_acts\">");
 
                                                 for (int i = 0; i < actionCombo.length; i++) {
-                                                     out.println("<option value='" + i + "'>"
+                                                    out.print("<option value='" + i + "'>"
                                                             + actionCombo[i] + "</option>");
-                                                }*/
+                                                }
                                                 out.print("</select></td>");
 
 
-
-                                                out.print("<td ><a href=\"ServletActionApplicants?id_applicants=" + a.getIdApplicants() + "&&action=0\">REJECT</a></td>");
-                                                out.print("<td><a href=\"ServletActionApplicants?id_applicants=" + a.getIdApplicants() + "&&action=1\">APPLYING</a></td>");
-                                                out.print("<td><a href=\"ServletActionApplicants?id_applicants=" + a.getIdApplicants() + "&&action=1\">APPLYING</a></td>");
-                                                out.print("<td><a href=\"ServletDecline?id=" + i.getId() + "\">DECLINE</a></td></tr>");
-
+                                                out.print("<td ><input type=\"hidden\" name=\"selApplicantsID\" value=\"" + a.getIdApplicants() + "\" /><input type=\"submit\" value=\"Go\" /></td></form></tr>");
                                             }
                                 %>
                             </table>

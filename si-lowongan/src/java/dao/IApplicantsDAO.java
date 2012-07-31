@@ -13,5 +13,7 @@ import java.util.List;
  */
 public interface IApplicantsDAO extends IGeneralDAO {
 
+    public Applicants get(int id) throws Exception;
+
     public List<Applicants> gets() throws Exception;
 }

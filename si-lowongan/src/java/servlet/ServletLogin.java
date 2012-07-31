@@ -71,6 +71,7 @@ public class ServletLogin extends HttpServlet {
                     message = "Your ID is not registered yet!";
                     url = "login.jsp";
                 } else {
+                    System.out.println("User : "+user.getIdUser());
                     if (!user.getPassword().equalsIgnoreCase(password)) {
                         flagMessage = true;
                         message = "The password you entered is wrong! Please try again.";
