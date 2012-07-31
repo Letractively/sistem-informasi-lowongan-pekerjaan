@@ -12,8 +12,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -27,7 +25,7 @@ import javax.servlet.http.HttpSession;
  */
 public class Login extends HttpServlet {
 
-    /** 
+    /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
      * @param response servlet response
@@ -44,78 +42,24 @@ public class Login extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-
-        HttpSession mySession = request.getSession(true);
-        String username = request.getParameter("id_user");
-        String password = request.getParameter("password");
-        String url = "";
-        String message = "";
-        Boolean flagMessage = false;
-
-        EntityManagerFactory emf =
-                Persistence.createEntityManagerFactory("si-lowonganPU");
-        EntityManager em = emf.createEntityManager();
-
-
-
-        if (username.equals("") || password.equals("")) {
-            flagMessage = true;
-            message = "Please fill the form first!";
-            url = "index.jsp";
-        } else {
-            UserDAOImpl dao = new UserDAOImpl(em);
-            try {
-                User user = dao.getById(username);
-                if (user == null) {
-                    flagMessage = true;
-                    message = "Your ID is not registered yet!";
-                    url = "index.jsp";
-                } else {
-                    if (!user.getPassword().equalsIgnoreCase(password)) {
-                        flagMessage = true;
-                        message = "The password you entered is wrong! Please try again.";
-                        url = "index.jsp";
-                    } else {
-                        flagMessage = false;
-                        url = "job_vacancies.jsp";
-
-                        mySession.setAttribute("throwEM", em);
-                        mySession.setAttribute("throwUser", user);
-                    }
-                }
-
-            } catch (Exception ex) {
-                flagMessage = true;
-                message = ex.getMessage();
-                url = "index.jsp";
-            }
-
-            if (flagMessage) {
-                mySession.setAttribute("throwMessage", message);
-                mySession.setAttribute("throwFlagMessage", flagMessage);
-            }
-
-            RequestDispatcher dis = request.getRequestDispatcher(url);
-            dis.include(request, response);
-            try {
-                /* TODO output your page here
-                out.println("<html>");
-                out.println("<head>");
-                out.println("<title>Servlet Login</title>");
-                out.println("</head>");
-                out.println("<body>");
-                out.println("<h1>Servlet Login at " + request.getContextPath () + "</h1>");
-                out.println("</body>");
-                out.println("</html>");
-                 */
-            } finally {
+        try {
+            /* TODO output your page here
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet Login</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet Login at " + request.getContextPath () + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+             */
+        } finally {
 //            out.close();
-            }
         }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /** 
+    /**
      * Handles the HTTP <code>GET</code> method.
      * @param request servlet request
      * @param response servlet response
@@ -128,7 +72,7 @@ public class Login extends HttpServlet {
         processRequest(request, response);
     }
 
-    /** 
+    /**
      * Handles the HTTP <code>POST</code> method.
      * @param request servlet request
      * @param response servlet response
@@ -157,7 +101,13 @@ public class Login extends HttpServlet {
             warning = "Password cannot be empty";
         }
 
+        System.out.println("User : "+user.getIdUser());
+        System.out.println("Password : "+user.getPassword());
+
+
         if (emptyField) {
+            System.out.println("kosong");
+
             request.setAttribute("emptyField", emptyField);
             request.setAttribute("warning", warning);
             rd = request.getRequestDispatcher("index.jsp");
@@ -194,7 +144,7 @@ public class Login extends HttpServlet {
 
     }
 
-    /** 
+    /**
      * Returns a short description of the servlet.
      * @return a String containing servlet description
      */

@@ -3,7 +3,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <title>Admin - Sistem Informasi Lowongan Pekerjaan</title>
-        <link href="Style/admin.css" rel="stylesheet" type="text/css"/>        
+        <link href="Style/admin.css" rel="stylesheet" type="text/css"/>
         <link href="Style/menu.css" rel="stylesheet" type="text/css"/>
         <link href="Style/jquery-ui-custom.css" rel="stylesheet" type="text/css"/>
         <script src="Script/jquery_002.js" language="javascript" type="text/javascript"></script>
@@ -12,30 +12,29 @@
         <script src="Script/app-common.js" language="javascript" type="text/javascript"></script>
     </head>
     <%
-                HttpSession mySession = request.getSession();
-                User user;
-                String message = (String) mySession.getAttribute("throwMessage");
-                try {
-                    user = (User) mySession.getAttribute("throwUser");
-                } catch (Exception e) {
-                    user = null;
-                }
+        HttpSession mySession = request.getSession();
+        User user;
+        try {
+            user = (User) mySession.getAttribute("user");
+        } catch (Exception e) {
+            user = null;
+        }
     %>
     <body>
         <div id="wrapper">
             <div id="top-heading">
-            </div>  
+            </div>
             <div id="tb-utama">
                 <div id="tb-menu">
                     <ul class="topnav">
                         <li id="first"><a href="index.jsp">Home</a></li>
                         <%
-                                    if (user != null) {
+                            if (user != null) {
                         %>
                         <li><a href="#">Recruitment</a>
                             <ul style="display: none;" class="subnav">
                                 <li><a href="job_vacancies.jsp">Job Vacancies</a></li>
-                                <li><a href="#">Applicants</a></li>
+                                <li><a href="#">Aplicants</a></li>
                             </ul>
                         </li>
                         <li><a href="#">Job</a>
@@ -43,13 +42,13 @@
                                 <li><a href="#">Job Titte</a></li>
                                 <li><a href="#">Job Spesification</a></li>
                             </ul>
-                        </li>  
+                        </li>
                         <li><a href="#">Commpany Info</a>
                             <ul style="display: none;" class="subnav">
                                 <li><a href="#">About US</a></li>
                                 <li><a href="#">Contact US</a></li>
                             </ul>
-                        </li>    
+                        </li>
                         <%                            }
                         %>
                     </ul>
@@ -61,18 +60,28 @@
             </div>
             <div id="container">
                 <%
-                            if (user == null) {
+                    if (user == null) {
                 %>
                 <form action="Login" method="post">
                     <table>
                         <tr>
                             <td colspan="2">
                                 <%
-                                                                if (message != null) {
-                                                                    if (!message.equalsIgnoreCase("")) {
-                                                                        out.println(message);
-                                                                    }
-                                                                }
+                                    boolean emptyField = false;
+                                    boolean validasi = true;
+                                    try {
+                                        emptyField = (Boolean) request.getAttribute("emptyField");
+                                        if (emptyField) {
+                                            out.println(request.getAttribute("warning").toString());
+                                        } else {
+
+                                            validasi = (Boolean) request.getAttribute("validasiLogin");
+                                            if (!validasi) {
+                                                out.println("Invalid Username or Password ");
+                                            }
+                                        }
+                                    } catch (Exception e) {
+                                    }
                                 %>
                             </td>
                         </tr>
@@ -86,11 +95,11 @@
                         </tr>
                         <tr>
                             <td colspan="2" align="right"><input type="submit" name="submit" value="Login"/></td>
-                        </tr>                           
+                        </tr>
                     </table>
                 </form>
                 <%
-                            }
+                    }
                 %>
             </div>
             <div id="footer" >
