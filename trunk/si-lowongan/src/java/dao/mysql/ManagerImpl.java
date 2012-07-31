@@ -31,4 +31,16 @@ public class ManagerImpl extends GeneralDAOImpl implements IManagerDAO {
         }
         return list;
     }
+
+    public Manager get(int id) throws Exception {
+        Manager list = new Manager();
+        try {
+            this.em.getTransaction().begin();
+            list = em.find(Manager.class, id);
+            this.em.getTransaction().commit();
+        } catch (Exception ex) {
+            throw ex;
+        }
+        return list;
+    }
 }

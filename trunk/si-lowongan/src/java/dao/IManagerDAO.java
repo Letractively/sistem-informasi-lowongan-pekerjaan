@@ -14,4 +14,5 @@ import java.util.List;
 public interface IManagerDAO extends IGeneralDAO {
 
     public List<Manager> gets() throws Exception;
+    public Manager get(int id) throws Exception;
 }
