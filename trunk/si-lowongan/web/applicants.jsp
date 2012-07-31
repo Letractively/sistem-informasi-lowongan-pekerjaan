@@ -25,7 +25,7 @@
     %>
 
     <head>
-        <title>Admin - SI Lowongan Pekerjaan</title>
+        <title>Admin - SI Job Vacancy</title>
         <link href="default4.css" rel="stylesheet" type="text/css" />
 
     </head>
@@ -34,7 +34,7 @@
         <div id="header">
             <div id="logo">
                 <h1>
-                    <a href="#">SI Lowongan Pekerjaan</a></h1>
+                    <a href="#">SI Job Vacancy</a></h1>
             </div>
             <%%>
 
@@ -74,6 +74,10 @@
                                                     out.println("<h2 class=\"title\" style=\"color: red\">Status updated!</h2>");
                                                 }
                                             }
+
+                                            if (listApplicants.size() <= 0) {
+                                                out.println("<h2 class=\"title\" style=\"color: red\">Applicants Data is Empty!</h2>");
+                                            }
                                 %>
                                 <!-- Kerja dari sini -->
                             <table border="0.5" cellspacing="17px" width="600px" style="background-color: #CDCDCD; ">
@@ -89,37 +93,43 @@
                                     <td colspan="2" align="center"><b><u>Action</u></b></td>
                                 </tr>
                                 <%
-                                            String fullName = "";
-                                            SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-                                            String[] actionCombo = {"--Action--", "Reject", "Applying", "Interview", "Pass Interview", "Hire"};
-                                            for (Applicants a : listApplicants) {
-                                                out.print("<tr><td>" + a.getIdJobVacancy().getTitleVacancy() + "</td>");
 
-                                                fullName = a.getFirstName();
-                                                if (a.getMiddleName() != null) {
-                                                    fullName += " " + a.getMiddleName();
+                                            if (listApplicants.size() > 0) {
+
+                                                String fullName = "";
+                                                SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+                                                String[] actionCombo = {"--Action--", "Reject", "Applying", "Interview", "Pass Interview", "Hire"};
+
+
+                                                for (Applicants a : listApplicants) {
+                                                    out.print("<tr><td>" + a.getIdJobVacancy().getTitleVacancy() + "</td>");
+
+                                                    fullName = a.getFirstName();
+                                                    if (a.getMiddleName() != null) {
+                                                        fullName += " " + a.getMiddleName();
+                                                    }
+
+                                                    if (a.getLastName() != null) {
+                                                        fullName += " " + a.getLastName();
+                                                    }
+                                                    out.print("<td>" + fullName + "</td>");
+
+
+                                                    out.print("<td>" + a.getIdJobVacancy().getIdManager().getNamaManager() + "</td>");
+                                                    out.print("<td>" + formatter.format(a.getDateApply()) + "</td>");
+                                                    out.print("<td>" + a.getStatus() + "</td>");
+                                                    out.print("<td>download</td>");
+                                                    out.print("<form action=\"ServletActionApplicants\"><td><select name=\"sel_applicants_acts\">");
+
+                                                    for (int i = 0; i < actionCombo.length; i++) {
+                                                        out.print("<option value='" + i + "'>"
+                                                                + actionCombo[i] + "</option>");
+                                                    }
+                                                    out.print("</select></td>");
+
+
+                                                    out.print("<td ><input type=\"hidden\" name=\"selApplicantsID\" value=\"" + a.getIdApplicants() + "\" /><input type=\"submit\" value=\"Go\" /></td></form></tr>");
                                                 }
-
-                                                if (a.getLastName() != null) {
-                                                    fullName += " " + a.getLastName();
-                                                }
-                                                out.print("<td>" + fullName + "</td>");
-
-
-                                                out.print("<td>" + a.getIdJobVacancy().getIdManager().getNamaManager() + "</td>");
-                                                out.print("<td>" + formatter.format(a.getDateApply()) + "</td>");
-                                                out.print("<td>" + a.getStatus() + "</td>");
-                                                out.print("<td>download</td>");
-                                                out.print("<form action=\"ServletActionApplicants\"><td><select name=\"sel_applicants_acts\">");
-
-                                                for (int i = 0; i < actionCombo.length; i++) {
-                                                    out.print("<option value='" + i + "'>"
-                                                            + actionCombo[i] + "</option>");
-                                                }
-                                                out.print("</select></td>");
-
-
-                                                out.print("<td ><input type=\"hidden\" name=\"selApplicantsID\" value=\"" + a.getIdApplicants() + "\" /><input type=\"submit\" value=\"Go\" /></td></form></tr>");
                                             }
                                 %>
                             </table>

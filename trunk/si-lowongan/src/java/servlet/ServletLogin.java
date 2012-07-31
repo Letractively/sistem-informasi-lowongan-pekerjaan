@@ -2,7 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package servlet;
 
 import dao.mysql.ApplicantsImpl;
@@ -27,7 +26,7 @@ import javax.servlet.http.HttpSession;
  * @author Cher99
  */
 public class ServletLogin extends HttpServlet {
-   
+
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
@@ -36,10 +35,10 @@ public class ServletLogin extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-         HttpSession mySession = request.getSession(true);
+        HttpSession mySession = request.getSession(true);
         String username = request.getParameter("usernameTextField");
         String password = request.getParameter("passwordTextField");
         String url = "";
@@ -53,6 +52,7 @@ public class ServletLogin extends HttpServlet {
 
 
         if (username.equals("") || password.equals("")) {
+            System.out.println("lewat sini");
             flagMessage = true;
             message = "Please fill the form first!";
             url = "login.jsp";
@@ -71,7 +71,7 @@ public class ServletLogin extends HttpServlet {
                     message = "Your ID is not registered yet!";
                     url = "login.jsp";
                 } else {
-                    System.out.println("User : "+user.getIdUser());
+                    System.out.println("User : " + user.getIdUser());
                     if (!user.getPassword().equalsIgnoreCase(password)) {
                         flagMessage = true;
                         message = "The password you entered is wrong! Please try again.";
@@ -80,6 +80,7 @@ public class ServletLogin extends HttpServlet {
                         flagMessage = false;
                         url = "home.jsp";
 
+                        mySession.setAttribute("throwFlagMessage", flagMessage);
                         //-- load all applicants--//
                         List<Applicants> listApplicants = daoApplicants.gets();
 
@@ -95,30 +96,35 @@ public class ServletLogin extends HttpServlet {
                 message = ex.getMessage();
                 url = "login.jsp";
             }
-
-            if (flagMessage) {
-                mySession.setAttribute("throwMessage", message);
-                mySession.setAttribute("throwFlagMessage", flagMessage);
-            }
-
-            RequestDispatcher dis = request.getRequestDispatcher(url);
-            dis.include(request, response);
-            try {
-                /* TODO output your page here
-                out.println("<html>");
-                out.println("<head>");
-                out.println("<title>Servlet Login</title>");
-                out.println("</head>");
-                out.println("<body>");
-                out.println("<h1>Servlet Login at " + request.getContextPath () + "</h1>");
-                out.println("</body>");
-                out.println("</html>");
-                 */
-            } finally {
-//            out.close();
-            }
         }
-    } 
+        if (flagMessage) {
+            request.setAttribute("throwMessage", message);
+        }
+        System.out.println("Messagenya : " + message);
+        System.out.println("urlnya : " + url);
+
+
+        RequestDispatcher dis = request.getRequestDispatcher(url);
+        dis.include(request, response);
+        try {
+            /* TODO output your page here
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet Login</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet Login at " + request.getContextPath () + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+             */
+        } finally {
+//            out.close();
+        }
+
+
+
+
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 
@@ -130,9 +136,9 @@ public class ServletLogin extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         processRequest(request, response);
-    } 
+    }
 
     /** 
      * Handles the HTTP <code>POST</code> method.
@@ -143,7 +149,7 @@ public class ServletLogin extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         processRequest(request, response);
     }
 
@@ -155,5 +161,4 @@ public class ServletLogin extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 }

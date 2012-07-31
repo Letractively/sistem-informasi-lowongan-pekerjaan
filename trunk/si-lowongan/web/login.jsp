@@ -1,21 +1,21 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 
     <%
-
                 String pesan = (String) request.getAttribute("throwMessage");
+
     %>
 
     <head>
-        <title>Admin - SI Lowongan Pekerjaan</title>
+        <title>Admin - SI Job Vacancy</title>
         <link href="default3.css" rel="stylesheet" type="text/css" />
+
     </head>
     <body>
         <!-- start header -->
         <div id="header">
-
             <div id="logo">
                 <h1>
-                    <a href="#">SI Lowongan Pekerjaan</a></h1>
+                    <a href="#">SI Job Vacancy</a></h1>
             </div>
 
         </div>
@@ -55,8 +55,8 @@
 
                                 <%
                                             if (pesan != null) {
-                                                out.println("<h2 class=\"title\">" + pesan + "</h2>");
-                                            }
+                                                out.println("<br><br><h3 class=\"title\" style=\"color: red\">" + pesan + "</h2>");
+                                            } 
                                 %>
 
                             </form>

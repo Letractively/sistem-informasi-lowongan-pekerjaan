@@ -24,6 +24,14 @@
         <servlet-name>ServletActionApplicants</servlet-name>
         <servlet-class>servlet.ServletActionApplicants</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ManageManager</servlet-name>
+        <servlet-class>servlet.ManageManager</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>TambahManager</servlet-name>
+        <servlet-class>servlet.TambahManager</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -47,6 +55,14 @@
     <servlet-mapping>
         <servlet-name>ServletActionApplicants</servlet-name>
         <url-pattern>/ServletActionApplicants</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManageManager</servlet-name>
+        <url-pattern>/ManageManager</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TambahManager</servlet-name>
+        <url-pattern>/TambahManager</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
