@@ -126,6 +126,7 @@ public class Login extends HttpServlet {
                         validasiLogin = true;
                         request.setAttribute("validasiLogin", validasiLogin);
                         mySession.setAttribute("user", user);
+                        mySession.setAttribute("entityManager", em);
                         rd = request.getRequestDispatcher("index.jsp");
                         break;
                     } else {
