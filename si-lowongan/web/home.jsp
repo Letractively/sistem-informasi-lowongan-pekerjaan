@@ -25,7 +25,7 @@
     %>
 
     <head>
-        <title>Admin - SI Lowongan Pekerjaan</title>
+        <title>Admin - SI Job Vacancy</title>
         <link href="default4.css" rel="stylesheet" type="text/css" />
 
     </head>
@@ -34,7 +34,7 @@
         <div id="header">                           
             <div id="logo">
                 <h1>
-                    <a href="#">SI Lowongan Pekerjaan</a></h1>
+                    <a href="#">SI Job Vacancy</a></h1>
             </div>
             <%%>
 
@@ -43,11 +43,11 @@
                 <ul>
                     <li><a href="home.jsp">Home</a></li>
                     <li><a href="job_vacancies.jsp">Job Vacancies</a></li>
-                    <li><a href="applicant.jsp">Applicants</a></li>
+                    <li><a href="applicants.jsp">Applicants</a></li>
                     <li><a href="job1.jsp">Job Conf</a></li>
                     <li><a href="ManageManager.jsp">Manager Conf</a></li>
                     <li><a href="#">Company Info</a></li>
-                    <li><a href="Logout.jsp">Logout</a></li>
+                    <li><a href="Logout">Logout</a></li>
 
                 </ul>
 
@@ -62,14 +62,14 @@
                 <!-- start content -->
                 <div id="content">
                     <div class="post">
-                        <h2 class="title">
+                        <h2 class="title" style="margin-left: 20px">
                             <%
                                         if (flag == null) {
                                             flag = new Boolean(false);
                                         }
                                       
                                         if (!flag) {
-                                            out.println("Selamat Datang " + user.getIdUser() + "..");
+                                            out.println("Welcome, " + user.getIdUser() + "..");
                                         }
 
                             %>

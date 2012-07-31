@@ -19,6 +19,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -27,9 +28,10 @@ import javax.servlet.http.HttpServletResponse;
 public class JobVacancyProcess extends HttpServlet {
 
     Manager manager = new Manager();
-    EntityManager em = manager.getEntityManager();
+    EntityManager em = null;
     JobVacancy jobVacancy;
-    JobVacancyImpl jvi = new JobVacancyImpl(manager.getEntityManager());
+    JobVacancyImpl jvi = null;
+    HttpSession mySession;
 
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -42,29 +44,43 @@ public class JobVacancyProcess extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+        mySession = request.getSession(true);
+        em = (EntityManager) mySession.getAttribute("throwEM");
+
+        jvi = new JobVacancyImpl(em);
+
+
+
         try {
-            try {
-                if (request.getParameter("manage_job_vacancy").toString().equals("add")) {
-                    response.sendRedirect("job_vacancies_form.jsp");
-                } else if (request.getParameter("manage_job_vacancy").toString().equals("delete")) {
-                    String[] deletes = request.getParameterValues("delete");
-                    for (String str : deletes) {
-                        JobVacancy jv = jvi.get(str);
-                        jvi.delete(jv);
+            if (request.getParameter("manage_job_vacancy") != null) {
+                try {
+                    if (request.getParameter("manage_job_vacancy").toString().equals("add")) {
+                        System.out.println("lewat 1");
+
+                        response.sendRedirect("job_vacancies_form.jsp");
+
+                    } else if (request.getParameter("manage_job_vacancy").toString().equals("delete")) {
+                        System.out.println("lewat 2");
+                        String[] deletes = request.getParameterValues("delete");
+                        for (String str : deletes) {
+                            JobVacancy jv = jvi.get(str);
+                            jvi.delete(jv);
+                        }
+                        response.sendRedirect("job_vacancies.jsp");
+                    } else if (request.getParameter("manage_job_vacancy").toString().equals("search")) {
+                        System.out.println("lewat 3");
+                        String[] objResult = new String[]{
+                            request.getParameter("job_titles"),
+                            request.getParameter("vacancy"),
+                            request.getParameter("hiring_manager"),
+                            request.getParameter("status")};
+                        request.setAttribute("objectResult", objResult);
+                        RequestDispatcher rd = request.getRequestDispatcher("job_vacancies.jsp");
+                        rd.forward(request, response);
                     }
-                    response.sendRedirect("job_vacancies.jsp");
-                } else if (request.getParameter("manage_job_vacancy").toString().equals("search")) {
-                    String[] objResult = new String[]{
-                        request.getParameter("job_titles"),
-                        request.getParameter("vacancy"),
-                        request.getParameter("hiring_manager"),
-                        request.getParameter("status")};
-                    request.setAttribute("objectResult", objResult);
-                    RequestDispatcher rd = request.getRequestDispatcher("job_vacancies.jsp");
-                    rd.forward(request, response);
+                } catch (Exception ex) {
+                    Logger.getLogger(JobVacancyProcess.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            } catch (Exception ex) {
-                Logger.getLogger(JobVacancyProcess.class.getName()).log(Level.SEVERE, null, ex);
             }
         } finally {
 //            out.close();
@@ -84,8 +100,17 @@ public class JobVacancyProcess extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
         PrintWriter out = response.getWriter();
+        mySession = request.getSession(true);
+        em = (EntityManager) mySession.getAttribute("throwEM");
+
+        jvi = new JobVacancyImpl(em);
+
+        System.out.println("JVI : " + jvi);
         try {
-            JobVacancy jv = jvi.get(request.getParameter("id").toString());
+            JobVacancy jv = null;
+            if (request.getParameter("id") != null) {
+                jv = jvi.get(request.getParameter("id").toString());
+            }
 //            out.println(request.getParameter("id").toString() + " sdfg");
             request.setAttribute("jobVacancy", jv);
             RequestDispatcher rd = null;

@@ -36,16 +36,16 @@
     %>
 
     <head>
-        <title>Admin - SI Lowongan Pekerjaan</title>
+        <title>Admin - SI Job Vacancy</title>
         <link href="default4.css" rel="stylesheet" type="text/css" />
 
     </head>
     <body>
         <!-- start header -->
-        <div id="header">                           
+        <div id="header">
             <div id="logo">
                 <h1>
-                    <a href="#">SI Lowongan Pekerjaan</a></h1>
+                    <a href="#">SI Job Vacancy</a></h1>
             </div>
             <%%>
 
@@ -54,7 +54,7 @@
                 <ul>
                     <li><a href="home.jsp">Home</a></li>
                     <li><a href="job_vacancies.jsp">Job Vacancies</a></li>
-                    <li><a href="applicant.jsp">Applicants</a></li>
+                    <li><a href="applicants.jsp">Applicants</a></li>
                     <li><a href="job1.jsp">Job Conf</a></li>
                     <li><a href="ManageManager">Manager Conf</a></li>
                     <li><a href="#">Company Info</a></li>

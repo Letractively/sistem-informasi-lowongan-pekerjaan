@@ -25,8 +25,8 @@
 
     %>
 
-    <head>
-        <title>Admin - SI Lowongan Pekerjaan</title>
+       <head>
+        <title>Admin - SI Job Vacancy</title>
         <link href="default4.css" rel="stylesheet" type="text/css" />
 
     </head>
@@ -35,7 +35,7 @@
         <div id="header">
             <div id="logo">
                 <h1>
-                    <a href="#">SI Lowongan Pekerjaan</a></h1>
+                    <a href="#">SI Job Vacancy</a></h1>
             </div>
             <%%>
 

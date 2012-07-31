@@ -24,8 +24,10 @@
         HttpSession mySession = request.getSession();
         User user;
 
-        Manager manager = new Manager();
-        EntityManager em = manager.getEntityManager();
+        Boolean flagError = (Boolean) request.getAttribute("throwFlagError");
+        String messge = (String) request.getAttribute("throwMessageError");
+        
+        EntityManager em = (EntityManager) mySession.getAttribute("throwEM");
 
         try {
             user = (User) mySession.getAttribute("user");
@@ -43,29 +45,28 @@
             }
     %>
 
-    <head>
-        <title>Admin - SI Lowongan Pekerjaan</title>
+       <head>
+        <title>Admin - SI Job Vacancy</title>
         <link href="default4.css" rel="stylesheet" type="text/css" />
 
     </head>
-
     <body>
         <!-- start header -->
-        <div id="header">                           
+        <div id="header">
             <div id="logo">
                 <h1>
-                    <a href="#">SI Lowongan Pekerjaan</a></h1>
+                    <a href="#">SI Job Vacancy</a></h1>
             </div>
             <%%>
 
             <div id="menu">
                 <!--tab user-->
                 <ul>
-                    <li><a href="home.jsp">Home</a></li>
+                   <li><a href="home.jsp">Home</a></li>
                     <li><a href="job_vacancies.jsp">Job Vacancies</a></li>
-                    <li><a href="#">Applicants</a></li>
+                    <li><a href="applicants.jsp">Applicants</a></li>
                     <li><a href="job1.jsp">Job Conf</a></li>
-                    <li><a href="#">Manager Conf</a></li>
+                    <li><a href="ManageManager.jsp">Manager Conf</a></li>
                     <li><a href="#">Company Info</a></li>
                     <li><a href="Logout">Logout</a></li>
 
