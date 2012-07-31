@@ -1,112 +1,91 @@
-<%@page import="entity.User"%>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-        <title>Admin - Sistem Informasi Lowongan Pekerjaan</title>
-        <link href="Style/admin.css" rel="stylesheet" type="text/css"/>
-        <link href="Style/menu.css" rel="stylesheet" type="text/css"/>
-        <link href="Style/jquery-ui-custom.css" rel="stylesheet" type="text/css"/>
-        <script src="Script/jquery_002.js" language="javascript" type="text/javascript"></script>
-        <script src="Script/jquery.js" language="javascript" type="text/javascript"></script>
-        <script src="Script/jquery-ui-custom.js" language="javascript" type="text/javascript"></script>
-        <script src="Script/app-common.js" language="javascript" type="text/javascript"></script>
-    </head>
-    <%
-        HttpSession mySession = request.getSession();
-        User user;
-        try {
-            user = (User) mySession.getAttribute("user");
-        } catch (Exception e) {
-            user = null;
-        }
-    %>
-    <body>
-        <div id="wrapper">
-            <div id="top-heading">
-            </div>
-            <div id="tb-utama">
-                <div id="tb-menu">
-                    <ul class="topnav">
-                        <li id="first"><a href="index.jsp">Home</a></li>
-                        <%
-                            if (user != null) {
-                        %>
-                        <li><a href="#">Recruitment</a>
-                            <ul style="display: none;" class="subnav">
-                                <li><a href="job_vacancies.jsp">Job Vacancies</a></li>
-                                <li><a href="#">Aplicants</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#">Job</a>
-                            <ul style="display: none;" class="subnav">
-                                <li><a href="#">Job Titte</a></li>
-                                <li><a href="#">Job Spesification</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#">Commpany Info</a>
-                            <ul style="display: none;" class="subnav">
-                                <li><a href="#">About US</a></li>
-                                <li><a href="#">Contact US</a></li>
-                            </ul>
-                        </li>
-                        <%                            }
-                        %>
-                    </ul>
-                </div>
-                <div id="tb-tanggal">
-                    <a href="Logout" class="logout" id="logout">Logout</a> |
-                </div>
-                <div class="clearer"></div>
-            </div>
-            <div id="container">
-                <%
-                    if (user == null) {
-                %>
-                <form action="Login" method="post">
-                    <table>
-                        <tr>
-                            <td colspan="2">
-                                <%
-                                    boolean emptyField = false;
-                                    boolean validasi = true;
-                                    try {
-                                        emptyField = (Boolean) request.getAttribute("emptyField");
-                                        if (emptyField) {
-                                            out.println(request.getAttribute("warning").toString());
-                                        } else {
+<%--
+    Document   : absen
+    Created on : Nov 29, 2011, 9:16:24 PM
+    Author     : Acer
+--%>
 
-                                            validasi = (Boolean) request.getAttribute("validasiLogin");
-                                            if (!validasi) {
-                                                out.println("Invalid Username or Password ");
-                                            }
-                                        }
-                                    } catch (Exception e) {
-                                    }
-                                %>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Username</td>
-                            <td><input type="text" name="id_user"/></td>
-                        </tr>
-                        <tr>
-                            <td>Password</td>
-                            <td><input type="password" name="password"/></td>
-                        </tr>
-                        <tr>
-                            <td colspan="2" align="right"><input type="submit" name="submit" value="Login"/></td>
-                        </tr>
-                    </table>
-                </form>
-                <%
-                    }
-                %>
+
+<%@page import="entity.User"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Date"%>
+
+<%@page contentType="text/html" pageEncoding="windows-1252"%>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+    <%
+                HttpSession mySession = request.getSession(true);
+                String pesan = (String) mySession.getAttribute("throwMessage");
+                Boolean flag = (Boolean) mySession.getAttribute("throwFlagMessage");
+                User user = (User) mySession.getAttribute("user");
+
+    %>
+
+    <head>
+        <title>Admin - SI Lowongan Pekerjaan</title>
+        <link href="default4.css" rel="stylesheet" type="text/css" />
+
+    </head>
+    <body>
+        <!-- start header -->
+        <div id="header">                           
+            <div id="logo">
+                <h1>
+                    <a href="#">SI Lowongan Pekerjaan</a></h1>
             </div>
-            <div id="footer" >
-                Proyek Sistem Informasi Lowongan Pekerjaan - Teknologi Persistance<br/>
-                Fakultas Teknologi Informasi<br/>
-                Universitas Kristen Satya Wacana
+            <%%>
+
+            <div id="menu">
+                <!--tab user-->
+                <ul>
+                    <li><a href="index.jsp">Home</a></li>
+                    <li><a href="job_vacancies.jsp">Job Vacancies</a></li>
+                    <li><a href="#">Applicants</a></li>
+                    <li><a href="#">Job Conf</a></li>
+                    <li><a href="#">Manager Conf</a></li>
+                    <li><a href="#">Company Info</a></li>
+                    <li><a href="Logout">Logout</a></li>
+
+                </ul>
+
             </div>
         </div>
+
+        <hr />
+        <!-- end header -->
+        <div id="wrapper">
+
+            <div id="page">
+                <!-- start content -->
+                <div id="content">
+                    <div class="post">
+                        <h2 class="title">
+                            <%
+                                            if (flag == null) {
+                                                flag = new Boolean(false);
+                                            }
+
+
+                                            if (!flag) {
+                                                out.println("Selamat Datang " + user.getIdUser() + "..");
+                                            }
+
+                                %>
+</h2>
+
+                        <div class="entry">
+                            <p>
+                                <br>
+
+                                
+                                <br>
+                            </p>
+                        </div>
+                    </div>
+                </div>                
+            </div>
+        </div>
+
     </body>
 </html>
