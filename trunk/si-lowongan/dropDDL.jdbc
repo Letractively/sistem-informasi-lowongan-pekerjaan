@@ -9,5 +9,5 @@ DROP TABLE manager
 DROP TABLE schedule_interview
 DROP TABLE job_vacancy
 DROP TABLE job
-DROP TABLE user
 DROP TABLE action_history
+DROP TABLE user
