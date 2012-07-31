@@ -1,7 +1,9 @@
 package servlet;
 
+import dao.IJobVacancyDAO;
 import dao.mysql.ApplicantsImpl;
 import dao.mysql.JobImpl;
+import dao.mysql.JobVacancyImpl;
 import entity.Applicants;
 import entity.Job;
 import entity.Manager;
@@ -42,6 +44,7 @@ public class AplicantProses extends HttpServlet {
         Applicants app = new Applicants();
 
         JobImpl Jbi = new JobImpl(em);
+        IJobVacancyDAO jobVacancy=new JobVacancyImpl(em);
         ApplicantsImpl ApI = new ApplicantsImpl(em);
 
         String uploadTo = getServletContext().getRealPath("/") + "file\\";
@@ -60,6 +63,7 @@ public class AplicantProses extends HttpServlet {
         String Status = "";
         String Method = "";
         String Vacancy = "";
+        String resume = "";
         try {
             boolean isMultipart = ServletFileUpload.isMultipartContent(request);
 
@@ -92,6 +96,7 @@ public class AplicantProses extends HttpServlet {
                     } // upload field
                     else {
                         String fileName = fileItem.getName();
+                        resume = fileName;
                         File fileTo = new File(uploadTo + fileName);
                         fileItem.write(fileTo);
                     }
@@ -107,9 +112,9 @@ public class AplicantProses extends HttpServlet {
                 app.setDateApply(today);
                 app.setStatus(Status);
                 app.setMethod(Method);
-                jb.setJobTitle(Vacancy);
+                app.setResume(resume);
+                app.setIdJobVacancy(jobVacancy.get(Vacancy));
                 ApI.insert(app);
-                Jbi.insert(jb);
             }
 
         } catch (Exception ex) {

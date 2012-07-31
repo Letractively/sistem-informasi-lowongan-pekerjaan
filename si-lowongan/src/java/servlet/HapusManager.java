@@ -27,6 +27,7 @@ public class HapusManager extends HttpServlet {
             entity.Manager m = new entity.Manager();
             m=new ManagerImpl(em).get(Integer.parseInt(request.getParameter("id")));
             dao.delete(m);
+            request.setAttribute("Status", "Berhasil Menghapus Data!");
             request.getRequestDispatcher("ManageManager").forward(request, response);
 
         } catch (Exception e) {

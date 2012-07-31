@@ -67,12 +67,15 @@
                 <!-- start content -->
                 <div id="content">
                     <div class="post">
+                        <h2 class="title">
+                            Manager Conf
+                        </h2>
                         <%
                                     if (request.getAttribute("Status") != null) {
-                                        out.print("<div style='text-decoration:blink;color:blue'><h3>" + request.getAttribute("Status") + "</h3></div>");
+                                        out.println("<h2 class=\"title\" style=\"color: red\">" + request.getAttribute("Status") + "</h2>");
                                     }
                         %>
-                        <table cellpadding="2" cellspacing="2" style="margin: 10px; width: 100%; text-align: center;" border="1">
+                        <table border="0.5" cellspacing="17px" width="600px" style="background-color: #CDCDCD; ">
                             <tr>
                                 <th>ID Manager</th>
                                 <th>Nama Manager</th>
@@ -86,15 +89,15 @@
                             <tr>
                                 <td><%= manager.get(i).getIdManager()%></td>
                                 <td><%= manager.get(i).getNamaManager()%></td>
-                                <td><a href="UbahManager.jsp?id=<%= manager.get(i).getIdManager()%>">Ubah</a></td>
-                                <td><a href="HapusManager?id=<%= manager.get(i).getIdManager()%>" id="hapus">Hapus</a></td>
+                                <td><a href="UbahManager.jsp?id=<%= manager.get(i).getIdManager()%>"><input type="button" value="Ubah"/></a></td>
+                                <td><a href="HapusManager?id=<%= manager.get(i).getIdManager()%>" id="hapus"><input type="button" value="Hapus"/></a></td>
                             </tr>
                             <%
                                             }
                                         }
                             %>
                         </table>
-                        <a href="TambahManager.jsp" style="margin-left: 15px">Tambah Manager</a>
+                        <a href="TambahManager.jsp" style="margin-left: 15px"><input type="button" value="Tambah Manager"/></a>
                         <h2 class="title">
                         </h2>
 

@@ -63,12 +63,15 @@
                 <!-- start content -->
                 <div id="content">
                     <div class="post">
+                        <h2 class="title">
+                            Manager Conf
+                        </h2>
                         <%
                                     if (request.getAttribute("Status") != null) {
-                                        out.print("<div style='text-decoration:blink;color:blue'><h3>" + request.getAttribute("Status") + "</h3></div>");
+                                        out.println("<h2 class=\"title\" style=\"color: red\">" + request.getAttribute("Status") + "</h2>");
                                     }
                         %>
-                        <form action="TambahManager" method="POST">
+                        <form action="TambahManager" method="POST"border="0.5" cellspacing="17px" width="600px" style="background-color: #CDCDCD; ">
                             <table cellpadding="2" cellspacing="2">
                                 <tr>
                                     <td>Nama Manager</td>
