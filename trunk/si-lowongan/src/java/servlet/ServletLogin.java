@@ -5,10 +5,13 @@
 
 package servlet;
 
+import dao.mysql.ApplicantsImpl;
 import dao.mysql.UserDAOImpl;
+import entity.Applicants;
 import entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -54,9 +57,15 @@ public class ServletLogin extends HttpServlet {
             message = "Please fill the form first!";
             url = "login.jsp";
         } else {
-            UserDAOImpl dao = new UserDAOImpl(em);
+            /*
+             * All DAO variables
+             */
+            UserDAOImpl daoUser = new UserDAOImpl(em);
+            ApplicantsImpl daoApplicants = new ApplicantsImpl(em);
+
+
             try {
-                User user = dao.getById(username);
+                User user = daoUser.getById(username);
                 if (user == null) {
                     flagMessage = true;
                     message = "Your ID is not registered yet!";
@@ -70,8 +79,13 @@ public class ServletLogin extends HttpServlet {
                         flagMessage = false;
                         url = "home.jsp";
 
+                        //-- load all applicants--//
+                        List<Applicants> listApplicants = daoApplicants.gets();
+
+                        //-- Put on session all important object  --//
                         mySession.setAttribute("throwEM", em);
                         mySession.setAttribute("user", user);
+                        mySession.setAttribute("listApplicants", listApplicants);
                     }
                 }
 
