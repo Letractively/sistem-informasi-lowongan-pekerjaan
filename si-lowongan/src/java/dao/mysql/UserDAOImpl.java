@@ -38,35 +38,53 @@ public class UserDAOImpl extends GeneralDAOImpl implements IUserDAO {
         return list;
     }
 
+    public User getById(String pId_user) throws Exception {
+        User u = null;
+        try {
+            em.getTransaction().begin();
+            u = em.find(User.class, pId_user);
+            em.getTransaction().commit();
+        } catch (Exception ex) {
+            throw ex;
+        }
+        return u;
+    }
+
     public static void main(String[] args) {
         EntityManagerFactory emf =
                 Persistence.createEntityManagerFactory("si-lowonganPU");
         EntityManager em = emf.createEntityManager();
-        
-        JobVacancyImpl jvi = new JobVacancyImpl(em);
+
+
+
+
+
+//        JobVacancyImpl jvi = new JobVacancyImpl(em);
         try {
-            System.out.println(jvi.get("job1343624312234").getIdJob().getJobTitle());
-    //        try {
-    //
-    //            List<User> listUser = new UserDAOImpl(em).gets();
-    //            System.out.println("size : " + listUser.size());
-    //        } catch (Exception ex) {
-    //        }
-    //
-    //        UserDAOImpl d = new UserDAOImpl(em);
-    //        
-    //        User user = new User();
-    //        user.setIdUser("admin");
-    //        user.setPassword("admin");
-    //        user.setDateCreate(new Date());
-    //        try {
-    //            d.insert(user);
-    //        } catch (Exception ex) {
-    //        }
-    //        }
+//            System.out.println(jvi.get("job1343624312234").getIdJob().getJobTitle());
+            //        try {
+            //
+            //            List<User> listUser = new UserDAOImpl(em).gets();
+            //            System.out.println("size : " + listUser.size());
+            //        } catch (Exception ex) {
+            //        }
+            //
+//            UserDAOImpl d = new UserDAOImpl(em);
+//
+//            User user = new User();
+//            user.setIdUser("admin");
+//            user.setPassword("admin");
+//            user.setDateCreate(new Date());
+            //        try {
+//                d.insert(user);
+            //        } catch (Exception ex) {
+            //        }
+            //        }
         } catch (Exception ex) {
-            Logger.getLogger(UserDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
+
+
         }
-        
+
     }
 }

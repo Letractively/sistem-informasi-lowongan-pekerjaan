@@ -12,13 +12,14 @@
         <script src="Script/app-common.js" language="javascript" type="text/javascript"></script>
     </head>
     <%
-        HttpSession mySession = request.getSession();
-        User user;
-        try {
-            user = (User) mySession.getAttribute("user");
-        } catch (Exception e) {
-            user = null;
-        }
+                HttpSession mySession = request.getSession();
+                User user;
+                String message = (String) mySession.getAttribute("throwMessage");
+                try {
+                    user = (User) mySession.getAttribute("throwUser");
+                } catch (Exception e) {
+                    user = null;
+                }
     %>
     <body>
         <div id="wrapper">
@@ -29,7 +30,7 @@
                     <ul class="topnav">
                         <li id="first"><a href="index.jsp">Home</a></li>
                         <%
-                            if (user != null) {
+                                    if (user != null) {
                         %>
                         <li><a href="#">Recruitment</a>
                             <ul style="display: none;" class="subnav">
@@ -60,28 +61,18 @@
             </div>
             <div id="container">
                 <%
-                    if (user == null) {
+                            if (user == null) {
                 %>
                 <form action="Login" method="post">
                     <table>
                         <tr>
                             <td colspan="2">
                                 <%
-                                    boolean emptyField = false;
-                                    boolean validasi = true;
-                                    try {
-                                        emptyField = (Boolean) request.getAttribute("emptyField");
-                                        if (emptyField) {
-                                            out.println(request.getAttribute("warning").toString());
-                                        } else {
-
-                                            validasi = (Boolean) request.getAttribute("validasiLogin");
-                                            if (!validasi) {
-                                                out.println("Invalid Username or Password ");
-                                            }
-                                        }
-                                    } catch (Exception e) {
-                                    }
+                                                                if (message != null) {
+                                                                    if (!message.equalsIgnoreCase("")) {
+                                                                        out.println(message);
+                                                                    }
+                                                                }
                                 %>
                             </td>
                         </tr>
@@ -99,7 +90,7 @@
                     </table>
                 </form>
                 <%
-                    }
+                            }
                 %>
             </div>
             <div id="footer" >

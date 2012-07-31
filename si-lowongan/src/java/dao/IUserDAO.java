@@ -14,4 +14,7 @@ import java.util.List;
 public interface IUserDAO extends IGeneralDAO {
 
     public List<User> gets() throws Exception;
+    public User getById(String pId_user) throws Exception;
+
+
 }
