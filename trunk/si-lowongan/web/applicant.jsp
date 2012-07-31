@@ -54,7 +54,7 @@
                     <li><a href="job_vacancies.jsp">Job Vacancies</a></li>
                     <li><a href="#">Applicants</a></li>
                     <li><a href="#">Job Conf</a></li>
-                    <li><a href="#">Manager Conf</a></li>
+                    <li><a href="ManageManager">Manager Conf</a></li>
                     <li><a href="#">Company Info</a></li>
                     <li><a href="Logout">Logout</a></li>
 
@@ -72,7 +72,7 @@
                 <div id="content">
                     <div class="post">
                         <table border="0.5" cellspacing="10px" style="background-color: #CDCDCD; ">
-                            <form action="AplicantProses" method="post">
+                            <form action="AplicantProses" method="post"  enctype="multipart/form-data" >
                                 <tr><td>Welcome Applicant !!</td></tr>
                                 <tr><td>Please Input Field </td></tr>
                                 <tr>
@@ -97,7 +97,7 @@
                                 </tr>
                                 <tr>
                                     <td>Resume</td>
-                                    <td><input type="text" name="email"></td>
+                                    <td><input type="file" name="fileSelect"/></td>
                                 </tr>
                                 <tr>
                                     <td>Job Title</td>
@@ -122,14 +122,14 @@
 
                         <h2 class="title">
                             <%
-                                if (flag == null) {
-                                    flag = new Boolean(false);
-                                }
+                              //  if (flag == null) {
+                                //    flag = new Boolean(false);
+                               // }
 
 
-                                if (!flag) {
-                                    out.println("Selamat Datang " + user.getIdUser() + "..");
-                                }
+                                //if (!flag) {
+                                  //  out.println("Selamat Datang " + user.getIdUser() + "..");
+                               // }
 
                             %>
                         </h2>
