@@ -32,7 +32,7 @@
 
                         <div class="entry">
                             <p>
-                            <form action="ServletLogin">
+                            <form action="ServletLogin" method="post">
                                 <table border="0">
                                     <tbody>
                                         <tr>
@@ -48,6 +48,7 @@
                                         <tr>
                                             <td colspan="2"></td>
                                             <td><input type="submit" value="Login" /></td>
+
                                         </tr>
                                     </tbody>
                                 </table>

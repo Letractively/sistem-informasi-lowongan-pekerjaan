@@ -17,6 +17,10 @@
         <servlet-class>servlet.ServletLogin</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>AplicantProses</servlet-name>
+        <servlet-class>servlet.AplicantProses</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>ServletActionApplicants</servlet-name>
         <servlet-class>servlet.ServletActionApplicants</servlet-class>
     </servlet>
@@ -27,6 +31,10 @@
     <servlet-mapping>
         <servlet-name>Logout</servlet-name>
         <url-pattern>/Logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AplicantProses</servlet-name>
+        <url-pattern>/AplicantProses</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>JobVacancyProcess</servlet-name>
@@ -46,6 +54,6 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>index.jsp</welcome-file>
+        <welcome-file>login.jsp</welcome-file>
     </welcome-file-list>
 </web-app>

@@ -20,7 +20,8 @@
                 Boolean flag = (Boolean) mySession.getAttribute("throwFlagMessage");
                 User user = (User) mySession.getAttribute("user");
 
-             
+
+
     %>
 
     <head>
@@ -63,23 +64,22 @@
                     <div class="post">
                         <h2 class="title">
                             <%
-                                            if (flag == null) {
-                                                flag = new Boolean(false);
-                                            }
+                                        if (flag == null) {
+                                            flag = new Boolean(false);
+                                        }
+                                      
+                                        if (!flag) {
+                                            out.println("Selamat Datang " + user.getIdUser() + "..");
+                                        }
 
-
-                                            if (!flag) {
-                                                out.println("Selamat Datang " + user.getIdUser() + "..");
-                                            }
-
-                                %>
-</h2>
+                            %>
+                        </h2>
 
                         <div class="entry">
                             <p>
                                 <br>
 
-                                
+
                                 <br>
                             </p>
                         </div>

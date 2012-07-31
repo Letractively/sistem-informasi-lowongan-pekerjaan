@@ -20,6 +20,8 @@ public class ManagerImpl extends GeneralDAOImpl implements IManagerDAO {
         super(em);
     }
 
+    
+
     public List<Manager> gets() throws Exception {
         List<Manager> list = new ArrayList<Manager>();
         try {
