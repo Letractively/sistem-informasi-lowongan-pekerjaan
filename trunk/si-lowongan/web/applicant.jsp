@@ -5,6 +5,8 @@
 --%>
 
 
+<%@page import="dao.mysql.JobVacancyImpl"%>
+<%@page import="entity.JobVacancy"%>
 <%@page import="dao.mysql.JobImpl"%>
 <%@page import="javax.persistence.EntityManager"%>
 <%@page import="servlet.Manager"%>
@@ -25,15 +27,15 @@
     %>
     <%
 
-        String pesan = (String) request.getAttribute("throwMessage");
-        /*HttpSession mySession = request.getSession(true);
-        String pesan = (String) mySession.getAttribute("throwMessage");
-        Boolean flag = (Boolean) mySession.getAttribute("throwFlagMessage");
-        User user = (User) mySession.getAttribute("user");*/
+                String pesan = (String) request.getAttribute("throwMessage");
+                /*HttpSession mySession = request.getSession(true);
+                String pesan = (String) mySession.getAttribute("throwMessage");
+                Boolean flag = (Boolean) mySession.getAttribute("throwFlagMessage");
+                User user = (User) mySession.getAttribute("user");*/
 
-        Manager manager = new Manager();
-        EntityManager em = manager.getEntityManager();
-        List<Job> listJob = new JobImpl(em).gets();
+                Manager manager = new Manager();
+                EntityManager em = manager.getEntityManager();
+                List<JobVacancy> listJob = new JobVacancyImpl(em).gets();
 
 
     %>
@@ -79,71 +81,70 @@
                     <div class="post">
                         <table border="0.5" cellspacing="10px" style="background-color: #CDCDCD; ">
                             <%
-                                if (pesan != null) {
-                                    out.println("<h2 class=\"title\">" + pesan + "</h2>");
-                                }
+                                        if (pesan != null) {
+                                            out.println("<h2 class=\"title\">" + pesan + "</h2>");
+                                        }
                             %>
-                            <form action="ApplicantProses" method="post">
 
-                                <form action="AplicantProses" method="post"  enctype="multipart/form-data" >
+                            <form action="AplicantProses" method="post"  enctype="multipart/form-data" >
 
-                                    <tr><td>Welcome Applicant !!</td></tr>
-                                    <tr><td>Please Input Field </td></tr>
-                                    <tr>
-                                        <td valign="top">Full Name </td>
-                                        <td> <input type="text" name="firstname"> </td> 
-                                        <td valign="top"><input type="text" name="lastname"></td>
-                                        <td valign="top"><input type="text" name="middlename"></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td align="center"> *FirstName</td>
-                                        <td align="center"> *MiddleName </td>
-                                        <td align="center"> *LastName</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Email</td>
-                                        <td><input type="text" name="email"></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Phone</td>
-                                        <td><input type="text" name="phone"></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Resume</td>
-                                        <td><input type="file" name="fileSelect"/></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Job Title</td>
-                                        <td> <select name="vacancy">
-                                                <option value="all">All</option>
-                                                <%
-                                                    for (Job job : listJob) {
-                                                        out.println("<option value=\""
-                                                                + job.getJobTitle() + "\">"
-                                                                + job.getJobTitle() + "</option>");
-                                                    }
-                                                %>
-                                            </select></td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <input type="submit" value="Submit"></td>
-                                    </tr>
+                                <tr><td>Welcome Applicant !!</td></tr>
+                                <tr><td>Please Input Field </td></tr>
+                                <tr>
+                                    <td valign="top">Full Name </td>
+                                    <td> <input type="text" name="firstname"> </td>
+                                    <td valign="top"><input type="text" name="lastname"></td>
+                                    <td valign="top"><input type="text" name="middlename"></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td align="center"> *FirstName</td>
+                                    <td align="center"> *MiddleName </td>
+                                    <td align="center"> *LastName</td>
+                                </tr>
+                                <tr>
+                                    <td>Email</td>
+                                    <td><input type="text" name="email"></td>
+                                </tr>
+                                <tr>
+                                    <td>Phone</td>
+                                    <td><input type="text" name="phone"></td>
+                                </tr>
+                                <tr>
+                                    <td>Resume</td>
+                                    <td><input type="file" name="fileSelect"/></td>
+                                </tr>
+                                <tr>
+                                    <td>Job Title</td>
+                                    <td> <select name="vacancy">
+                                            <option value="all">All</option>
+                                            <%
+                                                        for (JobVacancy job : listJob) {
+                                                            out.println("<option value=\""
+                                                                    + job.getIdJob() + "\">"
+                                                                    + job.getTitleVacancy() + "</option>");
+                                                        }
+                                            %>
+                                        </select></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input type="submit" value="Submit"></td>
+                                </tr>
 
-                                </form>
+                            </form>
                         </table>
 
                         <h2 class="title">
                             <%
-                                //  if (flag == null) {
-                                //    flag = new Boolean(false);
-                                // }
+                                        //  if (flag == null) {
+                                        //    flag = new Boolean(false);
+                                        // }
 
 
-                                //if (!flag) {
-                                //  out.println("Selamat Datang " + user.getIdUser() + "..");
-                                // }
+                                        //if (!flag) {
+                                        //  out.println("Selamat Datang " + user.getIdUser() + "..");
+                                        // }
 
                             %>
                         </h2>

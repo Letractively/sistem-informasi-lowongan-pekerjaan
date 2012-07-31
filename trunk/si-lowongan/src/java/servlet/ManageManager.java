@@ -30,7 +30,6 @@ public class ManageManager extends HttpServlet {
             List<entity.Manager> manager = new ArrayList<entity.Manager>();
             manager = mdao.gets();
             request.setAttribute("Manager", manager);
-            request.setAttribute("Status", "Berhasil Menghapus Data!");
             RequestDispatcher reqDis = request.getRequestDispatcher("ManageManager.jsp");
             reqDis.forward(request, response);
 

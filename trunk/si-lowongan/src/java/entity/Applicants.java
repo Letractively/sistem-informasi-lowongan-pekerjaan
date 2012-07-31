@@ -71,7 +71,7 @@ public class Applicants implements Serializable {
     @Basic(optional = false)
     @Lob
     @Column(name = "resume")
-    private byte[] resume;
+    private String resume;
     @Basic(optional = false)
     @Column(name = "keyword")
     private String keyword;
@@ -103,7 +103,7 @@ public class Applicants implements Serializable {
         this.idApplicants = idApplicants;
     }
 
-    public Applicants(Integer idApplicants, String firstName, String middleName, String lastName, String email, String phone, byte[] resume, String keyword, String comment, Date dateApply, String status, String method) {
+    public Applicants(Integer idApplicants, String firstName, String middleName, String lastName, String email, String phone, String resume, String keyword, String comment, Date dateApply, String status, String method) {
         this.idApplicants = idApplicants;
         this.firstName = firstName;
         this.middleName = middleName;
@@ -166,11 +166,11 @@ public class Applicants implements Serializable {
         this.phone = phone;
     }
 
-    public byte[] getResume() {
+    public String getResume() {
         return resume;
     }
 
-    public void setResume(byte[] resume) {
+    public void setResume(String resume) {
         this.resume = resume;
     }
 
