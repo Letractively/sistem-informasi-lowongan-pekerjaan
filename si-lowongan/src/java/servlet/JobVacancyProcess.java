@@ -25,7 +25,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author WILLIAM
  */
 public class JobVacancyProcess extends HttpServlet {
-    
+
     Manager manager = new Manager();
     EntityManager em = manager.getEntityManager();
     JobVacancy jobVacancy;
@@ -51,8 +51,8 @@ public class JobVacancyProcess extends HttpServlet {
                     for (String str : deletes) {
                         JobVacancy jv = jvi.get(str);
                         jvi.delete(jv);
-                        response.sendRedirect("job_vacancies.jsp");
                     }
+                    response.sendRedirect("job_vacancies.jsp");
                 } else if (request.getParameter("manage_job_vacancy").toString().equals("search")) {
                     String[] objResult = new String[]{
                         request.getParameter("job_titles"),
@@ -128,9 +128,9 @@ public class JobVacancyProcess extends HttpServlet {
             } else {
                 jobVacancy.setStatus("Inactive");
             }
-            
+
             jobVacancy.setPostDate(date);
-            
+
             JobVacancyImpl jvi = new JobVacancyImpl(manager.getEntityManager());
             if (request.getParameter("id_job_vacancy") != null) {
                 jobVacancy.setIdJobVacancy(Integer.parseInt(request.getParameter("id_job_vacancy")));
