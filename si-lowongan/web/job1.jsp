@@ -56,7 +56,7 @@
                     <li><a href="job_vacancies.jsp">Job Vacancies</a></li>
                     <li><a href="#">Applicants</a></li>
                     <li><a href="job1.jsp">Job Conf</a></li>
-                    <li><a href="#">Manager Conf</a></li>
+                    <li><a href="ManageManager">Manager Conf</a></li>
                     <li><a href="#">Company Info</a></li>
                     <li><a href="Logout">Logout</a></li>
 
@@ -97,7 +97,7 @@
                                             out.println("<tr>");
                                             out.println("<td><input type=\"checkbox\" "
                                                     + "name=\"delete\" value=\"" + job.getIdJob() + "\"/></td>");
-                                            out.println("<td><a href=job_form.jsp?id="
+                                            out.println("<td><a href=job_form1.jsp?id="
                                                     + job.getIdJob() + ">" + job.getJobTitle() + "</a></td>");
                                             out.println("<td>" + job.getJobDescription() + "</td>");
                                             out.println("</tr>");

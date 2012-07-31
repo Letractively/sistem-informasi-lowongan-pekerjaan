@@ -76,6 +76,11 @@
                 <!-- start content -->
                 <div id="content">
                     <div class="post">
+                        <%
+                                    if (request.getAttribute("Status") != null) {
+                                        out.print("<div style='text-decoration:blink;color:blue'><h3>" + request.getAttribute("Status") + "</h3></div>");
+                                    }
+                        %>
                         <form action="UbahManager" method="POST">
                             <table cellpadding="2" cellspacing="2">
                                 <tr>

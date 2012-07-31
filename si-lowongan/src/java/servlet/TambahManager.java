@@ -19,16 +19,20 @@ public class TambahManager extends HttpServlet {
 
         String nama = request.getParameter("Nama");
         try {
+            if (!nama.equals("")) {
+                EntityManagerFactory emf =
+                        Persistence.createEntityManagerFactory("si-lowonganPU");
+                EntityManager em = emf.createEntityManager();
 
-            EntityManagerFactory emf =
-                    Persistence.createEntityManagerFactory("si-lowonganPU");
-            EntityManager em = emf.createEntityManager();
+                IManagerDAO dao = new ManagerImpl(em);
+                entity.Manager m = new entity.Manager();
+                m.setNamaManager(nama);
+                dao.insert(m);
+                request.setAttribute("Status", "Berhasil Menambahkan Data!");
+            } else {
+                request.setAttribute("Status", "Data Tidak Boleh Kosong!");
+            }
 
-            IManagerDAO dao = new ManagerImpl(em);
-            entity.Manager m = new entity.Manager();
-            m.setNamaManager(nama);
-            dao.insert(m);
-            request.setAttribute("Status", "Berhasil");
             request.getRequestDispatcher("TambahManager.jsp").forward(request, response);
 
         } catch (Exception e) {

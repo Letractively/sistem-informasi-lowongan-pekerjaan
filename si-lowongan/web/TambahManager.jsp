@@ -65,7 +65,7 @@
                     <div class="post">
                         <%
                                     if (request.getAttribute("Status") != null) {
-                                        out.print(request.getAttribute("Status"));
+                                        out.print("<div style='text-decoration:blink;color:blue'><h3>" + request.getAttribute("Status") + "</h3></div>");
                                     }
                         %>
                         <form action="TambahManager" method="POST">
