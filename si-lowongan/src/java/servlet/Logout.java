@@ -36,7 +36,7 @@ public class Logout extends HttpServlet {
             synchronized (mySession) {
                 mySession.removeAttribute("user");
             }
-            response.sendRedirect("index.jsp");
+            response.sendRedirect("index2.jsp");
         } finally {
             out.close();
         }

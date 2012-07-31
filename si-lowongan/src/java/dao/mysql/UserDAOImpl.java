@@ -70,7 +70,7 @@ public class UserDAOImpl extends GeneralDAOImpl implements IUserDAO {
             //        }
             //
 //            UserDAOImpl d = new UserDAOImpl(em);
-//
+////
 //            User user = new User();
 //            user.setIdUser("admin");
 //            user.setPassword("admin");

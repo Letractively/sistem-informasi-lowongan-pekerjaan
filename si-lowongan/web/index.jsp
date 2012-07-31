@@ -20,6 +20,7 @@
                 Boolean flag = (Boolean) mySession.getAttribute("throwFlagMessage");
                 User user = (User) mySession.getAttribute("user");
 
+             
     %>
 
     <head>
