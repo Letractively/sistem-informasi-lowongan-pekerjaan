@@ -1,4 +1,4 @@
-<%@page import="dao.mysql.JobVacancyImpl"%>
+ <%@page import="dao.mysql.JobVacancyImpl"%>
 <%@page import="entity.JobVacancy"%>
 <%@page import="dao.mysql.ApplicantsImpl"%>
 <%@page import="entity.Applicants"%>
