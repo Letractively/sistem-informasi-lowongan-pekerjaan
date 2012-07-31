@@ -8,8 +8,11 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -40,9 +43,10 @@ import javax.xml.bind.annotation.XmlTransient;
 public class JobVacancy implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id_job_vacancy")
-    private String idJobVacancy;
+    private Integer idJobVacancy;
     @Basic(optional = false)
     @Column(name = "description")
     private String description;
@@ -59,23 +63,23 @@ public class JobVacancy implements Serializable {
     @Basic(optional = false)
     @Column(name = "number_position")
     private int numberPosition;
-    @OneToMany(mappedBy = "idJobVacancy")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idJobVacancy")
     private Collection<Applicants> applicantsCollection;
-    @JoinColumn(name = "id_manager", referencedColumnName = "id_manager")
-    @ManyToOne(optional = false)
-    private Manager idManager;
     @JoinColumn(name = "id_job", referencedColumnName = "id_job")
     @ManyToOne(optional = false)
     private Job idJob;
+    @JoinColumn(name = "id_manager", referencedColumnName = "id_manager")
+    @ManyToOne(optional = false)
+    private Manager idManager;
 
     public JobVacancy() {
     }
 
-    public JobVacancy(String idJobVacancy) {
+    public JobVacancy(Integer idJobVacancy) {
         this.idJobVacancy = idJobVacancy;
     }
 
-    public JobVacancy(String idJobVacancy, String description, Date postDate, String status, String titleVacancy, int numberPosition) {
+    public JobVacancy(Integer idJobVacancy, String description, Date postDate, String status, String titleVacancy, int numberPosition) {
         this.idJobVacancy = idJobVacancy;
         this.description = description;
         this.postDate = postDate;
@@ -84,11 +88,11 @@ public class JobVacancy implements Serializable {
         this.numberPosition = numberPosition;
     }
 
-    public String getIdJobVacancy() {
+    public Integer getIdJobVacancy() {
         return idJobVacancy;
     }
 
-    public void setIdJobVacancy(String idJobVacancy) {
+    public void setIdJobVacancy(Integer idJobVacancy) {
         this.idJobVacancy = idJobVacancy;
     }
 
@@ -141,20 +145,20 @@ public class JobVacancy implements Serializable {
         this.applicantsCollection = applicantsCollection;
     }
 
-    public Manager getIdManager() {
-        return idManager;
-    }
-
-    public void setIdManager(Manager idManager) {
-        this.idManager = idManager;
-    }
-
     public Job getIdJob() {
         return idJob;
     }
 
     public void setIdJob(Job idJob) {
         this.idJob = idJob;
+    }
+
+    public Manager getIdManager() {
+        return idManager;
+    }
+
+    public void setIdManager(Manager idManager) {
+        this.idManager = idManager;
     }
 
     @Override

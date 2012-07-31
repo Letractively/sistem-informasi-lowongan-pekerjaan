@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -45,7 +46,7 @@ public class User implements Serializable {
     @Column(name = "date_create")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateCreate;
-    @OneToMany(mappedBy = "idUser")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUser")
     private Collection<ActionHistory> actionHistoryCollection;
 
     public User() {
