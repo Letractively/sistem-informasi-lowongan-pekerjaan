@@ -69,17 +69,15 @@ public class UserDAOImpl extends GeneralDAOImpl implements IUserDAO {
             //        } catch (Exception ex) {
             //        }
             //
-//            UserDAOImpl d = new UserDAOImpl(em);
-////
-//            User user = new User();
-//            user.setIdUser("admin");
-//            user.setPassword("admin");
-//            user.setDateCreate(new Date());
-            //        try {
-//                d.insert(user);
-            //        } catch (Exception ex) {
-            //        }
-            //        }
+            UserDAOImpl d = new UserDAOImpl(em);
+//
+            User user = new User();
+            user.setIdUser("admin");
+            user.setPassword("admin");
+            user.setDateCreate(new Date());
+                   
+                d.insert(user);
+                   
         } catch (Exception ex) {
             ex.printStackTrace();
 

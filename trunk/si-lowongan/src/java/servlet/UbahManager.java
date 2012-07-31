@@ -22,17 +22,23 @@ public class UbahManager extends HttpServlet {
 
             String id = request.getParameter("Id");
             String nama = request.getParameter("Nama");
-            EntityManagerFactory emf =
-                    Persistence.createEntityManagerFactory("si-lowonganPU");
-            EntityManager em = emf.createEntityManager();
 
-            IManagerDAO dao = new ManagerImpl(em);
-            entity.Manager m = new entity.Manager();
-            m.setIdManager(Integer.parseInt(id));
-            m.setNamaManager(nama);
-            dao.update(m);
-            request.setAttribute("Status", "Berhasil");
-            request.getRequestDispatcher("ManageManager").forward(request, response);
+            if (!nama.equals("")) {
+                EntityManagerFactory emf =
+                        Persistence.createEntityManagerFactory("si-lowonganPU");
+                EntityManager em = emf.createEntityManager();
+
+                IManagerDAO dao = new ManagerImpl(em);
+                entity.Manager m = new entity.Manager();
+                m.setIdManager(Integer.parseInt(id));
+                m.setNamaManager(nama);
+                dao.update(m);
+                request.setAttribute("Status", "Berhasil Mengubah Data!");
+                request.getRequestDispatcher("ManageManager").forward(request, response);
+            } else {
+                request.setAttribute("Status", "Data Tidak Boleh Kosong!");
+                request.getRequestDispatcher("UbahManager.jsp?id=" + id + "").forward(request, response);
+            }
         } catch (Exception e) {
         } finally {
             out.close();

@@ -67,6 +67,11 @@
                 <!-- start content -->
                 <div id="content">
                     <div class="post">
+                        <%
+                                    if (request.getAttribute("Status") != null) {
+                                        out.print("<div style='text-decoration:blink;color:blue'><h3>" + request.getAttribute("Status") + "</h3></div>");
+                                    }
+                        %>
                         <table cellpadding="2" cellspacing="2" style="margin: 10px; width: 100%; text-align: center;" border="1">
                             <tr>
                                 <th>ID Manager</th>

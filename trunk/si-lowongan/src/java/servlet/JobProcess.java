@@ -41,14 +41,14 @@ public class JobProcess extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
             if (request.getParameter("manage_job").equals("Add")) {
-                response.sendRedirect("job_form.jsp");
+                response.sendRedirect("job_form1.jsp");
             } else if (request.getParameter("manage_job").equals("Delete")) {
                 String[] deletes = request.getParameterValues("delete");
                 for (String str : deletes) {
                     job = ji.get(str);
                     ji.delete(job);
                 }
-                response.sendRedirect("job.jsp");
+                response.sendRedirect("job1.jsp");
             }
         } catch (Exception ex) {
             Logger.getLogger(JobProcess.class.getName()).log(Level.SEVERE, null, ex);
@@ -74,7 +74,7 @@ public class JobProcess extends HttpServlet {
         try {
             if (request.getParameter("txt_job_title").equals("")
                     || request.getParameter("txt_job_desc").equals("")) {
-                url = "job.jsp";
+                url = "job1.jsp";
                 String emptyField = "Field cannot be empty";
                 request.setAttribute("jobTitleEmpty", emptyField);
             } else {
@@ -93,7 +93,7 @@ public class JobProcess extends HttpServlet {
                 } catch (Exception ex) {
                     Logger.getLogger(JobProcess.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                response.sendRedirect("job.jsp");
+                response.sendRedirect("job1.jsp");
             }
 
             rd = request.getRequestDispatcher(url);
