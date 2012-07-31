@@ -65,7 +65,7 @@
                     <li><a href="home.jsp">Home</a></li>
                     <li><a href="job_vacancies.jsp">Job Vacancies</a></li>
                     <li><a href="#">Applicants</a></li>
-                    <li><a href="job.jsp">Job Conf</a></li>
+                    <li><a href="job1.jsp">Job Conf</a></li>
                     <li><a href="#">Manager Conf</a></li>
                     <li><a href="#">Company Info</a></li>
                     <li><a href="Logout">Logout</a></li>
