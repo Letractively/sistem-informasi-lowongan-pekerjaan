@@ -10,6 +10,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -32,9 +34,10 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Job implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id_job")
-    private String idJob;
+    private Integer idJob;
     @Basic(optional = false)
     @Column(name = "job_title")
     private String jobTitle;
@@ -44,20 +47,20 @@ public class Job implements Serializable {
     public Job() {
     }
 
-    public Job(String idJob) {
+    public Job(Integer idJob) {
         this.idJob = idJob;
     }
 
-    public Job(String idJob, String jobTitle) {
+    public Job(Integer idJob, String jobTitle) {
         this.idJob = idJob;
         this.jobTitle = jobTitle;
     }
 
-    public String getIdJob() {
+    public Integer getIdJob() {
         return idJob;
     }
 
-    public void setIdJob(String idJob) {
+    public void setIdJob(Integer idJob) {
         this.idJob = idJob;
     }
 

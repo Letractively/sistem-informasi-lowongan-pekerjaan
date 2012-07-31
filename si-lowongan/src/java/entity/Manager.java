@@ -10,6 +10,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -32,9 +34,10 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Manager implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id_manager")
-    private String idManager;
+    private Integer idManager;
     @Basic(optional = false)
     @Column(name = "nama_manager")
     private String namaManager;
@@ -44,20 +47,20 @@ public class Manager implements Serializable {
     public Manager() {
     }
 
-    public Manager(String idManager) {
+    public Manager(Integer idManager) {
         this.idManager = idManager;
     }
 
-    public Manager(String idManager, String namaManager) {
+    public Manager(Integer idManager, String namaManager) {
         this.idManager = idManager;
         this.namaManager = namaManager;
     }
 
-    public String getIdManager() {
+    public Integer getIdManager() {
         return idManager;
     }
 
-    public void setIdManager(String idManager) {
+    public void setIdManager(Integer idManager) {
         this.idManager = idManager;
     }
 

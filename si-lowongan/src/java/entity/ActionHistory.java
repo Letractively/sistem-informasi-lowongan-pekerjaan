@@ -51,12 +51,12 @@ public class ActionHistory implements Serializable {
     @Basic(optional = false)
     @Column(name = "notes")
     private String notes;
-    @JoinColumn(name = "id_user", referencedColumnName = "id_user")
-    @ManyToOne
-    private User idUser;
     @JoinColumn(name = "id_applicants", referencedColumnName = "id_applicants")
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Applicants idApplicants;
+    @JoinColumn(name = "id_user", referencedColumnName = "id_user")
+    @ManyToOne(optional = false)
+    private User idUser;
 
     public ActionHistory() {
     }
@@ -104,20 +104,20 @@ public class ActionHistory implements Serializable {
         this.notes = notes;
     }
 
-    public User getIdUser() {
-        return idUser;
-    }
-
-    public void setIdUser(User idUser) {
-        this.idUser = idUser;
-    }
-
     public Applicants getIdApplicants() {
         return idApplicants;
     }
 
     public void setIdApplicants(Applicants idApplicants) {
         this.idApplicants = idApplicants;
+    }
+
+    public User getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(User idUser) {
+        this.idUser = idUser;
     }
 
     @Override

@@ -11,6 +11,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
@@ -47,9 +49,10 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Applicants implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id_applicants")
-    private String idApplicants;
+    private Integer idApplicants;
     @Basic(optional = false)
     @Column(name = "first_name")
     private String firstName;
@@ -86,21 +89,21 @@ public class Applicants implements Serializable {
     @Column(name = "method")
     private String method;
     @JoinColumn(name = "id_job_vacancy", referencedColumnName = "id_job_vacancy")
-    @ManyToOne
+    @ManyToOne(optional = false)
     private JobVacancy idJobVacancy;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idApplicants")
     private Collection<ScheduleInterview> scheduleInterviewCollection;
-    @OneToMany(mappedBy = "idApplicants")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idApplicants")
     private Collection<ActionHistory> actionHistoryCollection;
 
     public Applicants() {
     }
 
-    public Applicants(String idApplicants) {
+    public Applicants(Integer idApplicants) {
         this.idApplicants = idApplicants;
     }
 
-    public Applicants(String idApplicants, String firstName, String middleName, String lastName, String email, String phone, byte[] resume, String keyword, String comment, Date dateApply, String status, String method) {
+    public Applicants(Integer idApplicants, String firstName, String middleName, String lastName, String email, String phone, byte[] resume, String keyword, String comment, Date dateApply, String status, String method) {
         this.idApplicants = idApplicants;
         this.firstName = firstName;
         this.middleName = middleName;
@@ -115,11 +118,11 @@ public class Applicants implements Serializable {
         this.method = method;
     }
 
-    public String getIdApplicants() {
+    public Integer getIdApplicants() {
         return idApplicants;
     }
 
-    public void setIdApplicants(String idApplicants) {
+    public void setIdApplicants(Integer idApplicants) {
         this.idApplicants = idApplicants;
     }
 

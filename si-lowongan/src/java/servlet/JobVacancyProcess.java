@@ -112,13 +112,13 @@ public class JobVacancyProcess extends HttpServlet {
         try {
             jobVacancy = new JobVacancy();
             Date date = new Date();
-            jobVacancy.setIdJobVacancy("job" + date.getTime());
+//            jobVacancy.setIdJobVacancy("job" + date.getTime());
             jobVacancy.setTitleVacancy(request.getParameter("txt_vacancy_name"));
             Job job = new Job();
-            job.setIdJob(request.getParameter("job_titles"));
+            job.setIdJob(Integer.parseInt(request.getParameter("job_titles")));
             jobVacancy.setIdJob(job);
             entity.Manager mgr = new entity.Manager();
-            mgr.setIdManager(request.getParameter("hiring_manager"));
+            mgr.setIdManager(Integer.parseInt(request.getParameter("hiring_manager")));
             jobVacancy.setIdManager(mgr);
             jobVacancy.setNumberPosition(Integer.parseInt(request.getParameter("txt_number_pos")));
             jobVacancy.setDescription(request.getParameter("txt_description"));
@@ -133,7 +133,7 @@ public class JobVacancyProcess extends HttpServlet {
             
             JobVacancyImpl jvi = new JobVacancyImpl(manager.getEntityManager());
             if (request.getParameter("id_job_vacancy") != null) {
-                jobVacancy.setIdJobVacancy(request.getParameter("id_job_vacancy"));
+                jobVacancy.setIdJobVacancy(Integer.parseInt(request.getParameter("id_job_vacancy")));
                 jvi.update(jobVacancy);
             } else {
                 jvi.insert(jobVacancy);
