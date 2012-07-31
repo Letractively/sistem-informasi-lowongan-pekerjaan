@@ -32,13 +32,8 @@
                 <div class="clearer"></div>
             </div>
             <div id="container">
-                <table align ="center" border="2">
 
-                    <tr>
-                        <td>Title Vacation</td>
-                        <td>Description</td>
-                        <td>Show Descrition</td>
-                    </tr>
+                <table align ="center" border="0" class="griddata">
                     <%
                         List<JobVacancy> lj;
                         Manager manager = new Manager();
@@ -48,17 +43,14 @@
                             lj = new JobVacancyImpl(em).gets();
                             int size = lj.size();
                             for (int i = 0; i < size; i++) {
-                                
-                                %>
-                                <tr>
-                                    <td><%  out.print(lj.get(i).getTitleVacancy() + "");%></td>
-                                    <td><% out.print(lj.get(i).getDescription() + "");%></td>
-                                    <td><a href="#">Show Details</a></td>
-                                          
-                                </tr>
-                    
-                                <%
-                              
+                    %>
+                    <tr><td><% out.print(lj.get(i).getTitleVacancy() + "");%> <i>post on :<%out.print(lj.get(i).getPostDate() + "");%></i></td></tr>
+                    <tr>
+                        <td></td> <td><% out.print(lj.get(i).getDescription() + "");%></td>
+                    </tr>
+
+                    <%
+
                             }
                         } catch (Exception ex) {
                         }
