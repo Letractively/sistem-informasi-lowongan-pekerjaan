@@ -40,7 +40,7 @@
             <div id="menu">
                 <!--tab user-->
                 <ul>
-                    <li><a href="index.jsp">Home</a></li>
+                    <li><a href="home.jsp">Home</a></li>
                     <li><a href="job_vacancies.jsp">Job Vacancies</a></li>
                     <li><a href="#">Applicants</a></li>
                     <li><a href="#">Job Conf</a></li>

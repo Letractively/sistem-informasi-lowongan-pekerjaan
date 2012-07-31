@@ -52,7 +52,7 @@ public class ServletLogin extends HttpServlet {
         if (username.equals("") || password.equals("")) {
             flagMessage = true;
             message = "Please fill the form first!";
-            url = "index2.jsp";
+            url = "login.jsp";
         } else {
             UserDAOImpl dao = new UserDAOImpl(em);
             try {
@@ -60,15 +60,15 @@ public class ServletLogin extends HttpServlet {
                 if (user == null) {
                     flagMessage = true;
                     message = "Your ID is not registered yet!";
-                    url = "index2.jsp";
+                    url = "login.jsp";
                 } else {
                     if (!user.getPassword().equalsIgnoreCase(password)) {
                         flagMessage = true;
                         message = "The password you entered is wrong! Please try again.";
-                        url = "index2.jsp";
+                        url = "login.jsp";
                     } else {
                         flagMessage = false;
-                        url = "index.jsp";
+                        url = "home.jsp";
 
                         mySession.setAttribute("throwEM", em);
                         mySession.setAttribute("user", user);
@@ -78,7 +78,7 @@ public class ServletLogin extends HttpServlet {
             } catch (Exception ex) {
                 flagMessage = true;
                 message = ex.getMessage();
-                url = "index.jsp";
+                url = "login.jsp";
             }
 
             if (flagMessage) {
