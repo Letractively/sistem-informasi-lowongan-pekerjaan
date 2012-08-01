@@ -64,6 +64,7 @@ public class JobVacancyProcess extends HttpServlet {
                         String[] deletes = request.getParameterValues("delete");
                         for (String str : deletes) {
                             JobVacancy jv = jvi.get(str);
+                            //willy
                             jvi.delete(jv);
                         }
                         response.sendRedirect("job_vacancies.jsp");
@@ -109,7 +110,7 @@ public class JobVacancyProcess extends HttpServlet {
         try {
             JobVacancy jv = null;
             if (request.getParameter("id") != null) {
-                jv = jvi.get(request.getParameter("id").toString());
+//                jv = jvi.get(request.getParameter("id").toString());
             }
 //            out.println(request.getParameter("id").toString() + " sdfg");
             request.setAttribute("jobVacancy", jv);

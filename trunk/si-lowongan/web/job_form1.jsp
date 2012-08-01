@@ -19,38 +19,40 @@
 
 <html>
     <%
-        HttpSession mySession = request.getSession();
-        User user;
+                HttpSession mySession = request.getSession();
+                User user;
 
-        Manager manager = new Manager();
-        EntityManager em = manager.getEntityManager();
-        String id = null;
-        String error = "";
+                Manager manager = new Manager();
+                EntityManager em = manager.getEntityManager();
+                String id = null;
+                String error = "";
 
-        try {
-            user = (User) mySession.getAttribute("user");
-        } catch (Exception e) {
-            user = null;            
-        }
-        
-        try{
-            id = (String) request.getParameter("id");
-        }catch(Exception ex){
-            id = null;
-        }
-        
-        try{
-            error = request.getAttribute("fieldEmpty").toString();
-        }catch(Exception ex){
-            error = null;
-        }
+                try {
+                    user = (User) mySession.getAttribute("user");
+                } catch (Exception e) {
+                    user = null;
+                }
 
-        Job job = null;
-        JobImpl ji = new JobImpl(em);
-        if (id != null) {
-            job = ji.get(id);
-        }
-        if (user != null) {
+          
+
+                try {
+                    id = (String) request.getParameter("id");
+                } catch (Exception ex) {
+                    id = null;
+                }
+
+                try {
+                    error = request.getAttribute("fieldEmpty").toString();
+                } catch (Exception ex) {
+                    error = null;
+                }
+
+                Job job = null;
+                JobImpl ji = new JobImpl(em);
+                if (id != null) {
+                    job = ji.get(id);
+                }
+                if (user != null) {
 
     %>
 
@@ -101,51 +103,51 @@
                                 <br>
                             <form action="JobProcess" method="get">
                                 <%
-                                    if (id != null) {
-                                        out.println("<input type=\"hidden\" name=\"txt_job_id\" value=\"" + job.getIdJob() + "\"/>");
-                                    }
+                                            if (id != null) {
+                                                out.println("<input type=\"hidden\" name=\"txt_job_id\" value=\"" + job.getIdJob() + "\"/>");
+                                            }
                                 %>
                                 <table border="0.5" cellspacing="17px" style="background-color: #CDCDCD; ">
 
                                     <%
-                                        if (error != null) {
-                                            out.println("<tr><td colspan=\"2\">"+error+"</td></tr>");
-                                        }
+                                                if (error != null) {
+                                                    out.println("<tr><td colspan=\"2\">" + error + "</td></tr>");
+                                                }
                                     %>
 
                                     <tr>
                                         <td>Title</td>
                                         <%
-                                            if (id != null) {
-                                                out.println("<td><input type=\"text\" "
-                                                        + "name=\"txt_job_title\" value=\""
-                                                        + job.getJobTitle() + "\"/></td>");
-                                            } else {
-                                                out.println("<td><input type=\"text\" "
-                                                        + "name=\"txt_job_title\" "
-                                                        + "value=\"\"/></td>");
-                                            }
+                                                    if (id != null) {
+                                                        out.println("<td><input type=\"text\" "
+                                                                + "name=\"txt_job_title\" value=\""
+                                                                + job.getJobTitle() + "\"/></td>");
+                                                    } else {
+                                                        out.println("<td><input type=\"text\" "
+                                                                + "name=\"txt_job_title\" "
+                                                                + "value=\"\"/></td>");
+                                                    }
                                         %>
                                     </tr>
                                     <tr>
                                         <td>Description</td>
                                         <%
-                                            if (id != null) {
-                                                out.println("<td><input type=\"text\" "
-                                                        + "name=\"txt_job_desc\" value=\""
-                                                        + job.getJobDescription() + "\"/></td>");
-                                            } else {
-                                                out.println("<td><input type=\"text\" name=\"txt_job_desc\" value=\"\"/></td>");
-                                            }
+                                                    if (id != null) {
+                                                        out.println("<td><input type=\"text\" "
+                                                                + "name=\"txt_job_desc\" value=\""
+                                                                + job.getJobDescription() + "\"/></td>");
+                                                    } else {
+                                                        out.println("<td><input type=\"text\" name=\"txt_job_desc\" value=\"\"/></td>");
+                                                    }
                                         %>
                                     </tr>
                                     <tr>
                                         <%
-                                            if (id != null) {
-                                                out.println("<td colspan=\"2\"><input type=\"submit\" name=\"manage_job\" value=\"update\"/></td>");
-                                            } else {
-                                                out.println("<td colspan=\"2\"><input type=\"submit\" name=\"manage_job\" value=\"submit\"/></td>");
-                                            }
+                                                    if (id != null) {
+                                                        out.println("<td colspan=\"2\"><input type=\"submit\" name=\"manage_job\" value=\"update\"/></td>");
+                                                    } else {
+                                                        out.println("<td colspan=\"2\"><input type=\"submit\" name=\"manage_job\" value=\"submit\"/></td>");
+                                                    }
                                         %>
                                     </tr>
                                 </table>
@@ -159,8 +161,8 @@
 
     </body>
     <%
-        } else {
-            response.sendRedirect("home.jsp");
-        }
+                } else {
+                    response.sendRedirect("login.jsp");
+                }
     %>
 </html>

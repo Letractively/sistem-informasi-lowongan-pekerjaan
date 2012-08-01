@@ -61,7 +61,7 @@ public class ServletLogin extends HttpServlet {
              * All DAO variables
              */
             UserDAOImpl daoUser = new UserDAOImpl(em);
-            ApplicantsImpl daoApplicants = new ApplicantsImpl(em);
+            
 
 
             try {
@@ -82,12 +82,11 @@ public class ServletLogin extends HttpServlet {
 
                         mySession.setAttribute("throwFlagMessage", flagMessage);
                         //-- load all applicants--//
-                        List<Applicants> listApplicants = daoApplicants.gets();
+                        
 
                         //-- Put on session all important object  --//
                         mySession.setAttribute("throwEM", em);
-                        mySession.setAttribute("user", user);
-                        mySession.setAttribute("listApplicants", listApplicants);
+                        mySession.setAttribute("user", user);                        
                     }
                 }
 

@@ -1,5 +1,9 @@
-package dao.mysql;
+package servlet;
 
+import dao.IJobVacancyDAO;
+import dao.mysql.ApplicantsImpl;
+import dao.mysql.JobImpl;
+import dao.mysql.JobVacancyImpl;
 import entity.Applicants;
 import entity.Job;
 import entity.Manager;
@@ -34,12 +38,10 @@ public class AplicantProses extends HttpServlet {
                 Persistence.createEntityManagerFactory("si-lowonganPU");
         EntityManager em = emf.createEntityManager();
 
-        Manager manager = new Manager();
-
         Job jb = new Job();
         Applicants app = new Applicants();
 
-        JobImpl Jbi = new JobImpl(em);
+        IJobVacancyDAO jobVacancy = new JobVacancyImpl(em);
         ApplicantsImpl ApI = new ApplicantsImpl(em);
 
         String uploadTo = getServletContext().getRealPath("/") + "file\\";
@@ -58,11 +60,13 @@ public class AplicantProses extends HttpServlet {
         String Status = "";
         String Method = "";
         String Vacancy = "";
+        String resume = "";
         try {
             boolean isMultipart = ServletFileUpload.isMultipartContent(request);
 
             // no multipart foirm
             if (!isMultipart) {
+                request.setAttribute("Status", "Data Tidak Boleh Kosong!");
             } // multipart form
             else {
                 // Create a new file upload handler
@@ -80,37 +84,43 @@ public class AplicantProses extends HttpServlet {
                             middlename = fileItem.getString();
                         } else if (fileItem.getFieldName().equals("lastname")) {
                             lastname = fileItem.getString();
+                        } else if (fileItem.getFieldName().equals("vacancy")) {
+                            Vacancy = fileItem.getString();
                         } else if (fileItem.getFieldName().equals("email")) {
                             email = fileItem.getString();
                         } else if (fileItem.getFieldName().equals("phone")) {
                             phone = fileItem.getString();
-                        } else if (fileItem.getFieldName().equals("vacancy")) {
-                            Vacancy = fileItem.getString();
                         }
                     } // upload field
                     else {
                         String fileName = fileItem.getName();
+                        resume = fileName;
                         File fileTo = new File(uploadTo + fileName);
                         fileItem.write(fileTo);
                     }
                 }
-
-                app.setFirstName(firstname);
-                app.setMiddleName(middlename);
-                app.setLastName(lastname);
-                app.setEmail(email);
-                app.setPhone(phone);
-                app.setKeyword(Keyword);
-                app.setComment(Comment);
-                app.setDateApply(today);
-                app.setStatus(Status);
-                app.setMethod(Method);
-                jb.setJobTitle(Vacancy);
-                ApI.insert(app);
-                Jbi.insert(jb);
+                if (!firstname.equals("") && !middlename.equals("") && !lastname.equals("") && !Vacancy.equals("") && !phone.equals("") && !email.equals("")) {
+                    app.setFirstName(firstname);
+                    app.setMiddleName(middlename);
+                    app.setLastName(lastname);
+                    app.setEmail(email);
+                    app.setPhone(phone);
+                    app.setKeyword(Keyword);
+                    app.setComment(Comment);
+                    app.setDateApply(today);
+                    app.setStatus(Status);
+                    app.setMethod(Method);
+                    app.setResume(resume);
+                    app.setIdJobVacancy(jobVacancy.get(Vacancy));
+                    ApI.insert(app);
+                    request.setAttribute("Status", "Berhasil Menambahkan Data!");
+                } else {
+                    request.setAttribute("Status", "Data Tidak Boleh Kosong!");
+                }
             }
 
         } catch (Exception ex) {
+            request.setAttribute("Status", "Data Tidak Boleh Kosong!");
             Logger.getLogger(AplicantProses.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
         }
@@ -119,7 +129,7 @@ public class AplicantProses extends HttpServlet {
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /** 
+    /**
      * Handles the HTTP <code>GET</code> method.
      * @param request servlet request
      * @param response servlet response
@@ -132,7 +142,7 @@ public class AplicantProses extends HttpServlet {
         processRequest(request, response);
     }
 
-    /** 
+    /**
      * Handles the HTTP <code>POST</code> method.
      * @param request servlet request
      * @param response servlet response
@@ -145,7 +155,7 @@ public class AplicantProses extends HttpServlet {
         processRequest(request, response);
     }
 
-    /** 
+    /**
      * Returns a short description of the servlet.
      * @return a String containing servlet description
      */

@@ -19,20 +19,21 @@
 
 <html>
     <%
-        HttpSession mySession = request.getSession();
-        User user;
+                HttpSession mySession = request.getSession();
+                User user;
 
-        Manager manager = new Manager();
-        EntityManager em = manager.getEntityManager();
+                Manager manager = new Manager();
+                EntityManager em = manager.getEntityManager();
 
-        try {
-            user = (User) mySession.getAttribute("user");
-        } catch (Exception e) {
-            user = null;
-        }
+                try {
+                    user = (User) mySession.getAttribute("user");
+                } catch (Exception e) {
+                    user = null;
+                }
 
-        if (user != null) {
-            List<Job> listJob = new JobImpl(em).gets();
+             
+                if (user != null) {
+                    List<Job> listJob = new JobImpl(em).gets();
     %>
 
     <head>
@@ -74,7 +75,7 @@
                 <div id="content">
                     <div class="post">
                         <h2 class="title">
-                            Job
+                            Job Configuration
                         </h2>
                         <div class="entry">
                             <p>
@@ -93,19 +94,19 @@
                                         <td>Description</td>
                                     </tr>
                                     <%
-                                        if (listJob.size() > 0) {
-                                            for (Job job : listJob) {
-                                                out.println("<tr>");
-                                                out.println("<td><input type=\"checkbox\" "
-                                                        + "name=\"delete\" value=\"" + job.getIdJob() + "\"/></td>");
-                                                out.println("<td><a href=job_form1.jsp?id="
-                                                        + job.getIdJob() + ">" + job.getJobTitle() + "</a></td>");
-                                                out.println("<td>" + job.getJobDescription() + "</td>");
-                                                out.println("</tr>");
-                                            }
-                                        } else {
-                                            out.println("<tr><td colspan=\"2\">There is no data</td></tr>");
-                                        }
+                                                if (listJob.size() > 0) {
+                                                    for (Job job : listJob) {
+                                                        out.println("<tr>");
+                                                        out.println("<td><input type=\"checkbox\" "
+                                                                + "name=\"delete\" value=\"" + job.getIdJob() + "\"/></td>");
+                                                        out.println("<td><a href=job_form1.jsp?id="
+                                                                + job.getIdJob() + ">" + job.getJobTitle() + "</a></td>");
+                                                        out.println("<td>" + job.getJobDescription() + "</td>");
+                                                        out.println("</tr>");
+                                                    }
+                                                } else {
+                                                    out.println("<tr><td colspan=\"2\">There is no data</td></tr>");
+                                                }
                                     %>
                                 </table>
                             </form>
@@ -120,8 +121,9 @@
 
     </body>
     <%
-        } else {
-            response.sendRedirect("index.jsp");
-        }
+                } else {
+                    response.sendRedirect("login.jsp");
+                }
     %>
+
 </html>

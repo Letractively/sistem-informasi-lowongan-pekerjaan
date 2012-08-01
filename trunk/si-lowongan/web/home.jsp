@@ -16,9 +16,15 @@
 <html>
     <%
                 HttpSession mySession = request.getSession(true);
+
+
                 String pesan = (String) mySession.getAttribute("throwMessage");
                 Boolean flag = (Boolean) mySession.getAttribute("throwFlagMessage");
                 User user = (User) mySession.getAttribute("user");
+
+                if (user == null){
+                    response.sendRedirect("login.jsp");
+                }else{
 
 
 
@@ -45,7 +51,7 @@
                     <li><a href="job_vacancies.jsp">Job Vacancies</a></li>
                     <li><a href="applicants.jsp">Applicants</a></li>
                     <li><a href="job1.jsp">Job Conf</a></li>
-                    <li><a href="ManageManager.jsp">Manager Conf</a></li>
+                    <li><a href="ManageManager">Manager Conf</a></li>
                     <li><a href="#">Company Info</a></li>
                     <li><a href="Logout">Logout</a></li>
 
@@ -89,4 +95,6 @@
         </div>
 
     </body>
+
+    <%}%>
 </html>

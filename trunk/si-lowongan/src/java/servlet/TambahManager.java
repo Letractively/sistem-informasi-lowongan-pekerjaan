@@ -28,9 +28,9 @@ public class TambahManager extends HttpServlet {
                 entity.Manager m = new entity.Manager();
                 m.setNamaManager(nama);
                 dao.insert(m);
-                request.setAttribute("Status", "Berhasil Menambahkan Data!");
+                request.setAttribute("Status", "Data have successfully added!");
             } else {
-                request.setAttribute("Status", "Data Tidak Boleh Kosong!");
+                request.setAttribute("Status", "Data cannot be empty!");
             }
 
             request.getRequestDispatcher("TambahManager.jsp").forward(request, response);

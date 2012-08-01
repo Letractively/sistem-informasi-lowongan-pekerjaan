@@ -66,7 +66,7 @@ public class AplicantProses extends HttpServlet {
 
             // no multipart foirm
             if (!isMultipart) {
-                request.setAttribute("Status", "Data Tidak Boleh Kosong!");
+                request.setAttribute("Status", "Data cannot be empty!");
             } // multipart form
             else {
                 // Create a new file upload handler
@@ -113,14 +113,14 @@ public class AplicantProses extends HttpServlet {
                     app.setResume(resume);
                     app.setIdJobVacancy(jobVacancy.get(Vacancy));
                     ApI.insert(app);
-                    request.setAttribute("Status", "Berhasil Menambahkan Data!");
+                    request.setAttribute("Status", "Data have successfully added!");
                 } else {
-                    request.setAttribute("Status", "Data Tidak Boleh Kosong!");
+                    request.setAttribute("Status", "Data cannot be empty!");
                 }
             }
 
         } catch (Exception ex) {
-            request.setAttribute("Status", "Data Tidak Boleh Kosong!");
+            request.setAttribute("Status", "Data cannot be empty!");
             Logger.getLogger(AplicantProses.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
         }

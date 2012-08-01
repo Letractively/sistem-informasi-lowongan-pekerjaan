@@ -32,6 +32,18 @@
         <servlet-name>TambahManager</servlet-name>
         <servlet-class>servlet.TambahManager</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>HapusManager</servlet-name>
+        <servlet-class>servlet.HapusManager</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UbahManager</servlet-name>
+        <servlet-class>servlet.UbahManager</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>JobProcess</servlet-name>
+        <servlet-class>servlet.JobProcess</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -63,6 +75,18 @@
     <servlet-mapping>
         <servlet-name>TambahManager</servlet-name>
         <url-pattern>/TambahManager</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HapusManager</servlet-name>
+        <url-pattern>/HapusManager</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>JobProcess</servlet-name>
+        <url-pattern>/JobProcess</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UbahManager</servlet-name>
+        <url-pattern>/UbahManager</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

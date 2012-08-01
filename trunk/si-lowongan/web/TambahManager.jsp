@@ -22,10 +22,12 @@
                 String pesan = (String) mySession.getAttribute("throwMessage");
                 Boolean flag = (Boolean) mySession.getAttribute("throwFlagMessage");
                 User user = (User) mySession.getAttribute("user");
-
+                if (user == null) {
+                    response.sendRedirect("login.jsp");
+                }else{
     %>
 
-       <head>
+    <head>
         <title>Admin - SI Job Vacancy</title>
         <link href="default4.css" rel="stylesheet" type="text/css" />
 
@@ -64,7 +66,7 @@
                 <div id="content">
                     <div class="post">
                         <h2 class="title">
-                            Manager Conf
+                            Manager Configuration
                         </h2>
                         <%
                                     if (request.getAttribute("Status") != null) {
@@ -74,14 +76,14 @@
                         <form action="TambahManager" method="POST"border="0.5" cellspacing="17px" width="600px" style="background-color: #CDCDCD; ">
                             <table cellpadding="2" cellspacing="2">
                                 <tr>
-                                    <td>Nama Manager</td>
+                                    <td>Manager Name</td>
                                     <td>:</td>
                                     <td><input type="text" name="Nama"/></td>
                                 </tr>
                                 <tr>
                                     <td></td>
                                     <td></td>
-                                    <td><input type="submit" value="Tambah"/></td>
+                                    <td><input type="submit" value="Add"/></td>
                                 </tr>
                             </table>
                         </form>
@@ -102,4 +104,5 @@
         </div>
 
     </body>
+    <%}%>
 </html>

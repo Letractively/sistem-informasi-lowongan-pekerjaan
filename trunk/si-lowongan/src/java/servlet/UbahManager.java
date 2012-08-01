@@ -33,10 +33,10 @@ public class UbahManager extends HttpServlet {
                 m.setIdManager(Integer.parseInt(id));
                 m.setNamaManager(nama);
                 dao.update(m);
-                request.setAttribute("Status", "Berhasil Mengubah Data!");
+                request.setAttribute("Status", "Data have successfully updated!");
                 request.getRequestDispatcher("ManageManager").forward(request, response);
             } else {
-                request.setAttribute("Status", "Data Tidak Boleh Kosong!");
+                request.setAttribute("Status", "Data cannot be empty!");
                 request.getRequestDispatcher("UbahManager.jsp?id=" + id + "").forward(request, response);
             }
         } catch (Exception e) {
