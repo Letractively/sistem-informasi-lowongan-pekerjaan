@@ -57,7 +57,7 @@ public class AplicantProses extends HttpServlet {
         String phone = "";
         String Keyword = "";
         String Comment = "";
-        String Status = "";
+        String Status = "Application Initiated";
         String Method = "";
         String Vacancy = "";
         String resume = "";

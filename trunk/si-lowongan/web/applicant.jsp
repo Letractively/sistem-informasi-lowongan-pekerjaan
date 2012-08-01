@@ -56,16 +56,10 @@
 
             <div id="menu">
                 <!--tab user-->
-                <ul>
-                    <li><a href="home.jsp">Home</a></li>
-                    <li><a href="job_vacancies.jsp">Job Vacancies</a></li>
-                    <li><a href="applicants.jsp">Applicants</a></li>
-                    <li><a href="job1.jsp">Job Conf</a></li>
-                    <li><a href="ManageManager">Manager Conf</a></li>
+                  <ul>
+                    <li><a href="news.jsp">News</a></li>
+                    <li><a href="applicant.jsp">Applicant</a></li>
                     <li><a href="#">Company Info</a></li>
-                    <li><a href="Logout">Logout</a></li>
-
-
                 </ul>
 
             </div>
@@ -80,7 +74,10 @@
                 <div id="content">
                     <div class="post">
                         <h2 class="title" style="margin-left: 30px;">
-                            Please Input Field </h2>
+                            Applicant </h2>
+                        <br><br>
+                        <h4 class="title" style="margin-left: 30px;">
+                            Please input your data </h4>
                         <%
                                     if (request.getAttribute("Status") != null) {
                                         out.println("<h2 style='margin-left: 30px;color: red;'>" + request.getAttribute("Status") + "</h2>");
