@@ -25,13 +25,24 @@
         Manager manager = new Manager();
         EntityManager em = manager.getEntityManager();
         String id = null;
+        String error = "";
 
         try {
             user = (User) mySession.getAttribute("user");
-            id = (String) request.getParameter("id");
         } catch (Exception e) {
-            user = null;
+            user = null;            
+        }
+        
+        try{
+            id = (String) request.getParameter("id");
+        }catch(Exception ex){
             id = null;
+        }
+        
+        try{
+            error = request.getAttribute("fieldEmpty").toString();
+        }catch(Exception ex){
+            error = null;
         }
 
         Job job = null;
@@ -39,9 +50,7 @@
         if (id != null) {
             job = ji.get(id);
         }
-
         if (user != null) {
-
 
     %>
 
@@ -97,6 +106,13 @@
                                     }
                                 %>
                                 <table border="0.5" cellspacing="17px" style="background-color: #CDCDCD; ">
+
+                                    <%
+                                        if (error != null) {
+                                            out.println("<tr><td colspan=\"2\">"+error+"</td></tr>");
+                                        }
+                                    %>
+
                                     <tr>
                                         <td>Title</td>
                                         <%
@@ -144,7 +160,7 @@
     </body>
     <%
         } else {
-            response.sendRedirect("index.jsp");
+            response.sendRedirect("home.jsp");
         }
     %>
 </html>

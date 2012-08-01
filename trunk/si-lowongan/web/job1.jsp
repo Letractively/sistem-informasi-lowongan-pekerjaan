@@ -93,14 +93,18 @@
                                         <td>Description</td>
                                     </tr>
                                     <%
-                                        for (Job job : listJob) {
-                                            out.println("<tr>");
-                                            out.println("<td><input type=\"checkbox\" "
-                                                    + "name=\"delete\" value=\"" + job.getIdJob() + "\"/></td>");
-                                            out.println("<td><a href=job_form1.jsp?id="
-                                                    + job.getIdJob() + ">" + job.getJobTitle() + "</a></td>");
-                                            out.println("<td>" + job.getJobDescription() + "</td>");
-                                            out.println("</tr>");
+                                        if (listJob.size() > 0) {
+                                            for (Job job : listJob) {
+                                                out.println("<tr>");
+                                                out.println("<td><input type=\"checkbox\" "
+                                                        + "name=\"delete\" value=\"" + job.getIdJob() + "\"/></td>");
+                                                out.println("<td><a href=job_form1.jsp?id="
+                                                        + job.getIdJob() + ">" + job.getJobTitle() + "</a></td>");
+                                                out.println("<td>" + job.getJobDescription() + "</td>");
+                                                out.println("</tr>");
+                                            }
+                                        } else {
+                                            out.println("<tr><td colspan=\"2\">There is no data</td></tr>");
                                         }
                                     %>
                                 </table>
