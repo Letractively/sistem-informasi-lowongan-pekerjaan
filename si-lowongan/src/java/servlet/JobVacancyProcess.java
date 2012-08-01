@@ -135,36 +135,58 @@ public class JobVacancyProcess extends HttpServlet {
         PrintWriter out = response.getWriter();
 //        if (request.getParameter("submit_job_vacancy").equals("submit")) {
         try {
+//            boolean save = true;
+            int pos = -1;
+            String errorMsg = "";
+
             jobVacancy = new JobVacancy();
             Date date = new Date();
-//            jobVacancy.setIdJobVacancy("job" + date.getTime());
-            jobVacancy.setTitleVacancy(request.getParameter("txt_vacancy_name"));
-            Job job = new Job();
-            job.setIdJob(Integer.parseInt(request.getParameter("job_titles")));
-            jobVacancy.setIdJob(job);
-            entity.Manager mgr = new entity.Manager();
-            mgr.setIdManager(Integer.parseInt(request.getParameter("hiring_manager")));
-            jobVacancy.setIdManager(mgr);
-            jobVacancy.setNumberPosition(Integer.parseInt(request.getParameter("txt_number_pos")));
-            jobVacancy.setDescription(request.getParameter("txt_description"));
-            String[] active = request.getParameterValues("cbx_active");
-            if (active != null) {
-                jobVacancy.setStatus("Active");
+
+            if (request.getParameter("txt_vacancy_name").isEmpty()
+                    || request.getParameter("txt_description").isEmpty()
+                    || request.getParameter("txt_number_pos").isEmpty()) {
+                errorMsg = "Please complete field";
+                request.setAttribute("errorMsg", errorMsg);
+                RequestDispatcher rd = request.getRequestDispatcher("job_vacancies_form.jsp");
+                rd.forward(request, response);
             } else {
-                jobVacancy.setStatus("Inactive");
+                try {
+                    pos = Integer.parseInt(request.getParameter("txt_number_pos"));
+                    jobVacancy.setTitleVacancy(request.getParameter("txt_vacancy_name"));
+                    Job job = new Job();
+                    job.setIdJob(Integer.parseInt(request.getParameter("job_titles")));
+                    jobVacancy.setIdJob(job);
+                    entity.Manager mgr = new entity.Manager();
+                    mgr.setIdManager(Integer.parseInt(request.getParameter("hiring_manager")));
+                    jobVacancy.setIdManager(mgr);
+                    jobVacancy.setNumberPosition(Integer.parseInt(request.getParameter("txt_number_pos")));
+                    jobVacancy.setDescription(request.getParameter("txt_description"));
+                    jobVacancy.setPostDate(date);
+
+                    String[] active = request.getParameterValues("cbx_active");
+                    if (active != null) {
+                        jobVacancy.setStatus("Active");
+                    } else {
+                        jobVacancy.setStatus("Inactive");
+                    }
+
+                    JobVacancyImpl jvi = new JobVacancyImpl(manager.getEntityManager());
+                    if (request.getParameter("id_job_vacancy") != null) {
+                        jobVacancy.setIdJobVacancy(Integer.parseInt(request.getParameter("id_job_vacancy")));
+                        jvi.update(jobVacancy);
+                    } else {
+                        jvi.insert(jobVacancy);
+                    }
+                    response.sendRedirect("job_vacancies.jsp");
+                } catch (Exception ex) {
+                    errorMsg = "Please use number for number position";                    
+                    request.setAttribute("errorMsg", errorMsg);
+                    RequestDispatcher rd = request.getRequestDispatcher("job_vacancies_form.jsp");
+                    rd.forward(request, response);
+                }
+
             }
 
-            jobVacancy.setPostDate(date);
-
-            JobVacancyImpl jvi = new JobVacancyImpl(manager.getEntityManager());
-            if (request.getParameter("id_job_vacancy") != null) {
-                jobVacancy.setIdJobVacancy(Integer.parseInt(request.getParameter("id_job_vacancy")));
-                jvi.update(jobVacancy);
-            } else {
-                jvi.insert(jobVacancy);
-            }
-//            out.println(jobVacancy.getStatus() + " :status");
-            response.sendRedirect("job_vacancies.jsp");
         } catch (Exception ex) {
             Logger.getLogger(JobVacancyProcess.class.getName()).log(Level.SEVERE, null, ex);
         }
