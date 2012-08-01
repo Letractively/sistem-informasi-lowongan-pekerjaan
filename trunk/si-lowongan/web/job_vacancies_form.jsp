@@ -24,9 +24,6 @@
         HttpSession mySession = request.getSession();
         User user;
 
-        Boolean flagError = (Boolean) request.getAttribute("throwFlagError");
-        String messge = (String) request.getAttribute("throwMessageError");
-        
         EntityManager em = (EntityManager) mySession.getAttribute("throwEM");
 
         try {
@@ -39,13 +36,15 @@
             List<Job> listJob = new JobImpl(em).gets();
             List<entity.Manager> listManager = new ManagerImpl(em).gets();
             JobVacancy jv = null;
+            String errorMsg = null;
             try {
                 jv = (JobVacancy) request.getAttribute("jobVacancy");
+                errorMsg = (String) request.getAttribute("errorMsg");
             } catch (Exception ex) {
             }
     %>
 
-       <head>
+    <head>
         <title>Admin - SI Job Vacancy</title>
         <link href="default4.css" rel="stylesheet" type="text/css" />
 
@@ -62,7 +61,7 @@
             <div id="menu">
                 <!--tab user-->
                 <ul>
-                   <li><a href="home.jsp">Home</a></li>
+                    <li><a href="home.jsp">Home</a></li>
                     <li><a href="job_vacancies.jsp">Job Vacancies</a></li>
                     <li><a href="applicants.jsp">Applicants</a></li>
                     <li><a href="job1.jsp">Job Conf</a></li>
@@ -92,6 +91,11 @@
                                 <br>
                             <form action="JobVacancyProcess" method="POST">
                                 <table>
+                                    <%
+                                        if(errorMsg != null){
+                                            out.println("<tr><td>"+errorMsg+"</td></tr>");
+                                        }
+                                    %>
                                     <tr>
                                         <td>Job Title</td>
                                         <td>
