@@ -110,7 +110,7 @@ public class JobVacancyProcess extends HttpServlet {
         try {
             JobVacancy jv = null;
             if (request.getParameter("id") != null) {
-//                jv = jvi.get(request.getParameter("id").toString());
+                jv = jvi.get(request.getParameter("id").toString());
             }
 //            out.println(request.getParameter("id").toString() + " sdfg");
             request.setAttribute("jobVacancy", jv);
@@ -180,7 +180,7 @@ public class JobVacancyProcess extends HttpServlet {
                     }
                     response.sendRedirect("job_vacancies.jsp");
                 } catch (Exception ex) {
-                    errorMsg = "Please use number for number position";                    
+                    errorMsg = "Please use number for number position";
                     request.setAttribute("errorMsg", errorMsg);
                     RequestDispatcher rd = request.getRequestDispatcher("job_vacancies_form.jsp");
                     rd.forward(request, response);

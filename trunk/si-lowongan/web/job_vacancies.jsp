@@ -179,7 +179,7 @@
                                                         if (objResult[0].equalsIgnoreCase("all")) {
                                                             show = true;
                                                         } else {
-                                                            if (jobVacancy.getIdJob().getIdJob().equals(objResult[0])) {
+                                                            if (jobVacancy.getIdJob().getIdJob()== Integer.parseInt(objResult[0])) {
                                                                 show = true;
                                                             } else {
                                                                 show = false;
@@ -200,7 +200,7 @@
                                                         if (objResult[2].equalsIgnoreCase("all")) {
                                                             show = true;
                                                         } else {
-                                                            if (jobVacancy.getIdManager().getIdManager().equals(objResult[2])) {
+                                                            if (jobVacancy.getIdManager().getIdManager() == Integer.parseInt(objResult[2])) {
                                                                 show = true;
                                                             } else {
                                                                 show = false;
