@@ -61,7 +61,7 @@
                             <p>
 
 
-                            <table border="0.5" align="center" cellspacing="17px" style="background-color: #CDCDCD; ">
+                            <table border="0.5" align="center" cellspacing="17px" width="100%" style="background-color: #CDCDCD; ">
                                 <%
                                     List<JobVacancy> lj ;
                                     Manager manager = new Manager();
