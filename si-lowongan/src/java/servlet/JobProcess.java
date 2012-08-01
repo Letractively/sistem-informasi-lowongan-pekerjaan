@@ -74,9 +74,9 @@ public class JobProcess extends HttpServlet {
         try {
             if (request.getParameter("txt_job_title").equals("")
                     || request.getParameter("txt_job_desc").equals("")) {
-                url = "job1.jsp";
+                url = "job_form1.jsp";
                 String emptyField = "Field cannot be empty";
-                request.setAttribute("jobTitleEmpty", emptyField);
+                request.setAttribute("fieldEmpty", emptyField);
             } else {
                 job = new Job();
                 if (request.getParameter("manage_job").equals("update")) {
