@@ -66,6 +66,7 @@ public class AplicantProses extends HttpServlet {
 
             // no multipart foirm
             if (!isMultipart) {
+                request.setAttribute("Status", "Data Tidak Boleh Kosong!");
             } // multipart form
             else {
                 // Create a new file upload handler
@@ -98,23 +99,28 @@ public class AplicantProses extends HttpServlet {
                         fileItem.write(fileTo);
                     }
                 }
-
-                app.setFirstName(firstname);
-                app.setMiddleName(middlename);
-                app.setLastName(lastname);
-                app.setEmail(email);
-                app.setPhone(phone);
-                app.setKeyword(Keyword);
-                app.setComment(Comment);
-                app.setDateApply(today);
-                app.setStatus(Status);
-                app.setMethod(Method);
-                app.setResume(resume);
-                app.setIdJobVacancy(jobVacancy.get(Vacancy));
-                ApI.insert(app);
+                if (!firstname.equals("") && !middlename.equals("") && !lastname.equals("") && !Vacancy.equals("") && !phone.equals("") && !email.equals("")) {
+                    app.setFirstName(firstname);
+                    app.setMiddleName(middlename);
+                    app.setLastName(lastname);
+                    app.setEmail(email);
+                    app.setPhone(phone);
+                    app.setKeyword(Keyword);
+                    app.setComment(Comment);
+                    app.setDateApply(today);
+                    app.setStatus(Status);
+                    app.setMethod(Method);
+                    app.setResume(resume);
+                    app.setIdJobVacancy(jobVacancy.get(Vacancy));
+                    ApI.insert(app);
+                    request.setAttribute("Status", "Berhasil Menambahkan Data!");
+                } else {
+                    request.setAttribute("Status", "Data Tidak Boleh Kosong!");
+                }
             }
 
         } catch (Exception ex) {
+            request.setAttribute("Status", "Data Tidak Boleh Kosong!");
             Logger.getLogger(AplicantProses.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
         }

@@ -35,7 +35,7 @@ public class JobVacancyImpl extends GeneralDAOImpl implements IJobVacancyDAO {
     public JobVacancy get(String id) throws Exception {
         JobVacancy jv = new JobVacancy();
         this.em.getTransaction().begin();
-        jv = (JobVacancy) this.em.createQuery("SELECT ja FROM JobVacancy ja WHERE ja.idJobVacancy = '" + id + "'").getSingleResult();
+        jv = (JobVacancy) this.em.createQuery("SELECT j FROM JobVacancy j WHERE j.idJobVacancy = '" + id + "'").getSingleResult();
         this.em.getTransaction().commit();
         return jv;
     }

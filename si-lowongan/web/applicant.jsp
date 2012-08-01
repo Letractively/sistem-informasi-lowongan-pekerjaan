@@ -27,7 +27,7 @@
     %>
     <%
 
-                String pesan = (String) request.getAttribute("throwMessage");
+                //String pesan = (String) request.getAttribute("throwMessage");
                 /*HttpSession mySession = request.getSession(true);
                 String pesan = (String) mySession.getAttribute("throwMessage");
                 Boolean flag = (Boolean) mySession.getAttribute("throwFlagMessage");
@@ -79,28 +79,26 @@
                 <!-- start content -->
                 <div id="content">
                     <div class="post">
-                        <table border="0.5" cellspacing="10px" style="background-color: #CDCDCD; ">
-                            <%
-                                        if (pesan != null) {
-                                            out.println("<h2 class=\"title\">" + pesan + "</h2>");
-                                        }
-                            %>
-
-                            <form action="AplicantProses" method="post"  enctype="multipart/form-data" >
-
-                                <tr><td>Welcome Applicant !!</td></tr>
-                                <tr><td>Please Input Field </td></tr>
+                        <h2 class="title" style="margin-left: 30px;">
+                            Please Input Field </h2>
+                        <%
+                                    if (request.getAttribute("Status") != null) {
+                                        out.println("<h2 style='margin-left: 30px;color: red;'>" + request.getAttribute("Status") + "</h2>");
+                                    }
+                        %>
+                        <form action="AplicantProses" method="post"  enctype="multipart/form-data" >
+                            <table border="0" style="margin-left: 30px;" cellpadding="2" cellspacing="2">
                                 <tr>
-                                    <td valign="top">Full Name </td>
-                                    <td> <input type="text" name="firstname"> </td>
-                                    <td valign="top"><input type="text" name="lastname"></td>
-                                    <td valign="top"><input type="text" name="middlename"></td>
+                                    <td>FirstName</td>
+                                    <td><input type="text" name="firstname"></td>
                                 </tr>
                                 <tr>
-                                    <td></td>
-                                    <td align="center"> *FirstName</td>
-                                    <td align="center"> *MiddleName </td>
-                                    <td align="center"> *LastName</td>
+                                    <td>MiddleName</td>
+                                    <td><input type="text" name="lastname"></td>
+                                </tr>
+                                <tr>
+                                    <td>LastName</td>
+                                    <td><input type="text" name="middlename"></td>
                                 </tr>
                                 <tr>
                                     <td>Email</td>
@@ -117,7 +115,7 @@
                                             <%
                                                         for (JobVacancy job : listJob) {
                                                             out.println("<option value='"
-                                                                    + job.getIdJob() + "'>"
+                                                                    + job.getIdJobVacancy() + "'>"
                                                                     + job.getTitleVacancy() + "</option>");
                                                         }
                                             %>
@@ -131,9 +129,8 @@
                                     <td>
                                         <input type="submit" value="Submit"></td>
                                 </tr>
-
-                            </form>
-                        </table>
+                            </table>
+                        </form>
 
                         <h2 class="title">
                             <%
