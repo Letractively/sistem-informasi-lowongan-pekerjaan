@@ -24,6 +24,10 @@
                 User user = (User) mySession.getAttribute("user");
 
 
+                if (user == null){
+                    response.sendRedirect("login.jsp");
+                }else{
+
                 List<Manager> manager = new ArrayList<Manager>();
                 manager = (List<Manager>) request.getAttribute("Manager");
 
@@ -68,36 +72,36 @@
                 <div id="content">
                     <div class="post">
                         <h2 class="title">
-                            Manager Conf
+                            Manager Configuration
                         </h2>
                         <%
                                     if (request.getAttribute("Status") != null) {
                                         out.println("<h2 class=\"title\" style=\"color: red\">" + request.getAttribute("Status") + "</h2>");
                                     }
                         %>
-                        <table border="0.5" cellspacing="17px" width="600px" style="background-color: #CDCDCD; ">
+                        <table border="0.5" cellspacing="7px" width="600px" style="background-color: #CDCDCD; ">
                             <tr>
-                                <th>ID Manager</th>
-                                <th>Nama Manager</th>
-                                <th>Ubah</th>
-                                <th>Hapus</th>
+                                <th>Manager ID</th>
+                                <th>Manager Name</th>
+                                <th>Update</th>
+                                <th>Delete</th>
                             </tr>
                             <%
                                         if (manager != null) {
                                             for (int i = 0; i < manager.size(); i++) {
                             %>
                             <tr>
-                                <td><%= manager.get(i).getIdManager()%></td>
-                                <td><%= manager.get(i).getNamaManager()%></td>
-                                <td><a href="UbahManager.jsp?id=<%= manager.get(i).getIdManager()%>"><input type="button" value="Ubah"/></a></td>
-                                <td><a href="HapusManager?id=<%= manager.get(i).getIdManager()%>" id="hapus"><input type="button" value="Hapus"/></a></td>
+                                <td align="center"><%= manager.get(i).getIdManager()%></td>
+                                <td align="center"><%= manager.get(i).getNamaManager()%></td>
+                                <td align="center"><a href="UbahManager.jsp?id=<%= manager.get(i).getIdManager()%>"><input type="button" value="Update"/></a></td>
+                                <td align="center"><a href="HapusManager?id=<%= manager.get(i).getIdManager()%>" id="hapus"><input type="button" value="Delete"/></a></td>
                             </tr>
                             <%
                                             }
                                         }
                             %>
                         </table>
-                        <a href="TambahManager.jsp" style="margin-left: 15px"><input type="button" value="Tambah Manager"/></a>
+                        <a href="TambahManager.jsp" style="margin-left: 15px"><input type="button" value="Add Manager"/></a>
                         <h2 class="title">
                         </h2>
 
@@ -115,4 +119,5 @@
         </div>
 
     </body>
+    <%}%>
 </html>
