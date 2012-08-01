@@ -40,7 +40,7 @@
 
     %>
 
-      <head>
+    <head>
         <title>Admin - SI Job Vacancy</title>
         <link href="default4.css" rel="stylesheet" type="text/css" />
 
@@ -111,21 +111,21 @@
                                     <td><input type="text" name="phone"></td>
                                 </tr>
                                 <tr>
-                                    <td>Resume</td>
-                                    <td><input type="file" name="fileSelect"/></td>
-                                </tr>
-                                <tr>
                                     <td>Job Title</td>
                                     <td> <select name="vacancy">
                                             <option value="all">All</option>
                                             <%
                                                         for (JobVacancy job : listJob) {
-                                                            out.println("<option value=\""
-                                                                    + job.getIdJob() + "\">"
+                                                            out.println("<option value='"
+                                                                    + job.getIdJob() + "'>"
                                                                     + job.getTitleVacancy() + "</option>");
                                                         }
                                             %>
                                         </select></td>
+                                </tr>
+                                <tr>
+                                    <td>Resume</td>
+                                    <td><input type="file" name="fileSelect"/></td>
                                 </tr>
                                 <tr>
                                     <td>

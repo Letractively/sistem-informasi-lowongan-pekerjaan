@@ -38,13 +38,10 @@ public class AplicantProses extends HttpServlet {
                 Persistence.createEntityManagerFactory("si-lowonganPU");
         EntityManager em = emf.createEntityManager();
 
-        Manager manager = new Manager();
-
         Job jb = new Job();
         Applicants app = new Applicants();
 
-        JobImpl Jbi = new JobImpl(em);
-        IJobVacancyDAO jobVacancy=new JobVacancyImpl(em);
+        IJobVacancyDAO jobVacancy = new JobVacancyImpl(em);
         ApplicantsImpl ApI = new ApplicantsImpl(em);
 
         String uploadTo = getServletContext().getRealPath("/") + "file\\";
@@ -86,12 +83,12 @@ public class AplicantProses extends HttpServlet {
                             middlename = fileItem.getString();
                         } else if (fileItem.getFieldName().equals("lastname")) {
                             lastname = fileItem.getString();
+                        } else if (fileItem.getFieldName().equals("vacancy")) {
+                            Vacancy = fileItem.getString();
                         } else if (fileItem.getFieldName().equals("email")) {
                             email = fileItem.getString();
                         } else if (fileItem.getFieldName().equals("phone")) {
                             phone = fileItem.getString();
-                        } else if (fileItem.getFieldName().equals("vacancy")) {
-                            Vacancy = fileItem.getString();
                         }
                     } // upload field
                     else {
