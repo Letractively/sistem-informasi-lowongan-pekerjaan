@@ -71,10 +71,10 @@
         <!-- start footer -->
         <div id="wrapper2">
             <div id="footer">
-                PT. DREAMDAY
+                <b>SI Job Vacancy</b>
             </div>
             <p id="legal">
-                Copyright (c) 2011 D.B.D.R All rights reserved.
+                Copyright (c) Del-Fra-Will-Bri-Wilb-Ris-Faj 2012  All rights reserved.
             </p>
         </div>
     </body>

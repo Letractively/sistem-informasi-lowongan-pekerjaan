@@ -38,7 +38,8 @@
                 <!--tab user-->
                 <ul>
                     <li><a href="news.jsp">News</a></li>
-                    <li><a href="#">Applicant</a></li>
+                    <li><a href="applicant.jsp">Applicant</a></li>
+                    <li><a href="#">Company Info</a></li>
                 </ul>
 
             </div>
